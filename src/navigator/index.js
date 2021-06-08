@@ -54,7 +54,7 @@ const Navigator = (props, ref) => {
         <NavigationContainer>
             {/* <RootStack.Navigator> */}
             {
-                navigatorComponent(false)
+                navigatorComponent(true)
             }
             {/* <RootStack.Navigator screenOptions={{
                     headerShown: false,
