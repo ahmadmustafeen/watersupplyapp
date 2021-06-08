@@ -1,31 +1,29 @@
 import React from 'react'
 
-// import Navigator from './src/navigator';
+import Navigator from './src/navigator';
 import { View, Text } from 'react-native'
 
 import { navigationRef } from './NavigationService';
-import { createStackNavigator } from '@react-navigation/stack';
+
 import SignIn from './src/containers/SignIn';
 import { NavigationContainer } from '@react-navigation/native';
-
+import { createStackNavigator } from '@react-navigation/stack';
 
 const RootStack = createStackNavigator();
 
 const App = props => {
   return (
-    <View>
-      <SignIn />
-      {/* <Navigator ref={navigationRef} /> */}
-      {/* <NavigationContainer >
-        <RootStack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <RootStack.Screen name="Login" component={SignIn} />
-        </RootStack.Navigator>
-      </NavigationContainer> */}
+    <Navigator ></Navigator>
+    // <NavigationContainer>
+    //   <RootStack.Navigator screenOptions={{
+    //     headerShown: false,
+    //   }}>
+    //     <RootStack.Screen name="Home" component={SignIn} />
+    //   </RootStack.Navigator>
 
-    </View>
+    // </NavigationContainer>
+
+
   )
 
 }

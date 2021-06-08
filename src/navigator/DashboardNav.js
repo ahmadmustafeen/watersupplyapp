@@ -1,21 +1,24 @@
 import React from 'react';
-import { createStackNavigator } from "react-navigation-stack";
+import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../containers/Home'
-
-import { HOME } from '../constants/Screens'
-
+import { HOME } from '../constants/Screens';
 
 
 
-const Stack = createStackNavigator();
-export const DashboardNav = () => {
+const DashboardStack = createStackNavigator();
 
+const DashboardNav = props => {
     return (
-        <Stack.Navigator
+        <DashboardStack.Navigator
             screenOptions={{
                 headerShown: false,
             }}>
-            <Stack.Screen name={HOME} component={Home} />
-        </Stack.Navigator>
-    );
-};
+            <DashboardStack.Screen name={HOME} component={Home} />
+        </DashboardStack.Navigator>
+
+    )
+}
+
+
+
+export default DashboardNav

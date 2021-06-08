@@ -12,7 +12,7 @@ const SignIn = props => {
 
             <View key="content" style={styles.container}>
 
-                <Text>DAS</Text>
+                <Text>SignIn</Text>
             </View>
         </Screen>
     )

@@ -1,21 +1,23 @@
 import React from 'react';
-import { createStackNavigator } from "react-navigation-stack";
-import { SIGNIN_SCREEN } from '../constants/Screens'
+import { createStackNavigator } from '@react-navigation/stack';
+// import { SIGNIN_SCREEN } from '../constants/Screens'
 import SignIn from '../containers/SignIn';
+import { SIGNIN_SCREEN } from '../constants/Screens';
 
 
+const AuthStack = createStackNavigator();
 
 
-const AuthScreen = createStackNavigator();
-export const AuthNav = () => {
-
+const AuthNav = props => {
     return (
-        <AuthScreen.Navigator
+        <AuthStack.Navigator
             screenOptions={{
                 headerShown: false,
-                initialRouteName: 'SIGNIN_SCREEN',
             }}>
-            <AuthScreen.Screen name={"SIGNIN_SCREEN"} component={SignIn} />
-        </AuthScreen.Navigator>
-    );
-};
+            <AuthStack.Screen name={SIGNIN_SCREEN} component={SignIn} />
+        </AuthStack.Navigator>
+    )
+}
+
+
+export default AuthNav
