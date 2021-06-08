@@ -1,0 +1,255 @@
+{
+  "translation": {
+    "arabicBook": "ARABIC BOOKS",
+    "englishBook": "ENGLISH BOOKS",
+    "bookclub": "BOOK CLUBS",
+    "bookmark": "BOOKMARKS",
+    "requestBook": "Request Books",
+    "requestEducationalBook": "Request Educational Book",
+    "submit": "Submit"
+  },
+  "drawer": {
+    "home": "Home",
+    "profile": "Profile",
+    "signIn": "Sign In",
+    "aboutUs": "About Us",
+    "favorite": "Favourites",
+    "myOrder": "My Order",
+    "setting": "Settings",
+    "contactUs": "Contact Us",
+    "guestUser": "Guest User",
+    "poweredBy": "Powered By Line"
+  },
+  "forgotPassword": {
+    "forgot_password": "Forgot Password?",
+    "enter_email": "Enter the email address you used to create your account and we will email you a link to reset your password",
+    "resetPassword": "Reset Password",
+    "modal_heading": "Please check your Registered Email",
+    "modal_description": "Your Password Reset Link Has Been Sent To Your Email",
+    "modal_button_label": "Continue",
+    "email": "Email"
+  },
+  "ResetPassword": {
+    "resetPassword": "Reset Password",
+    "modal_heading": "Please check your Registered Email",
+    "modal_description": "Your Password Reset Link Has Been Sent To Your Email",
+    "modal_button_label": "Continue",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "Please": "Please Enter"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "signInLabel": " Sign in to your account",
+    "signInHeader": "Hello!",
+    "forgetPassword": "Forgot Password",
+    "signIn": "SIGN IN",
+    "createAccount": "Create new account",
+    "skip": "Skip",
+    "Please": "Please Enter Your",
+    "ok": "Ok"
+  },
+  "createAccount": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "signIn": "Sign In",
+    "bycreating": "By creating an account you agree to our",
+    "termAndService": "Terms of Services and Privacy Policy",
+    "signUp": "SIGN UP",
+    "Please": "Please Enter",
+    "valid email": "valid email",
+    "ok": "Ok"
+  },
+  "Header": {
+    "Home": "HOME",
+    "Settings": "Settings",
+    "ContactUs": "Contact Us",
+    "ReturnPolicy": "Return Policy",
+    "PrivacyPolicy": "Privacy Policy",
+    "TermsAndConditionsScreen": "Terms and Conditions",
+    "SignUpTermCondition": "Terms and Conditions",
+    "JoinUs": "Join Us",
+    "AddToCart": "Cart",
+    "MyOrders": "My Orders",
+    "Favorites": "Favourites",
+    "MyProfile": "My Profile",
+    "AddNewAddress": "Add New Address",
+    "EditProfile": "Edit Profile",
+    "ChangePassword": "Change Password",
+    "Search": "Search",
+    "Filter": "Filter",
+    "AboutUs": "About Us",
+    "Checkout": "CHECKOUT",
+    "PaymentView": "Payment View"
+  },
+  "BookDetails": {
+    "isbn": "ISBN",
+    "totalPages": "Total Pages",
+    "coverType": "Type of Cover",
+    "genre": "Genre",
+    "productId": "Product Id",
+    "sizeInInches": "Size in (inch)",
+    "typeOfBookmark": "Type of Bookmark",
+    "description": "Description",
+    "addToCart": "Add To Cart",
+    "outOfStock": "Out Of Stock",
+    "youMayAlsoLike": "You may also like:",
+    "by": "by ",
+    "price": "Price:",
+    "morebookclubs": "More Book Clubs:"
+  },
+  "Settings": {
+    "language": "Language",
+    "notification": "Notification",
+    "currency": "Currency",
+    "termsAndConditions": "Terms and Conditions",
+    "privacyPolicy": "Privacy Policy",
+    "returnPolicy": "Return Policy",
+    "joinUs": "Join Us",
+    "Arabic": "عربى"
+  },
+  "ContactUs": {
+    "supportChat": "Support Chat:",
+    "phoneNumber": "Phone Number:",
+    "email": "Email",
+    "emailstaric": "Email*",
+    "Namestaric": "Name*",
+    "Messangestaric": "Message*",
+    "displayEmail": "Email:",
+    "name": "Name",
+    "mobileNumberOptional": "Mobile Number (optional)",
+    "message": "Message",
+    "phoneValidation": "Phone Number should be between 11 digits to 15 digits",
+    "ok": "ok",
+    "Please": "Please Enter"
+  },
+  "Cart": {
+    "subTotal": "Sub Total",
+    "shippingCharges": "Shipping Charges",
+    "total": "Total",
+    "checkout": "CHECKOUT"
+  },
+  "JoinUs": {
+    "name": "Name",
+    "email": "Email",
+    "mobileNumber": "Mobile Number",
+    "selectBusinessType": "Select Business Type",
+    "emailstaric": "Email*",
+    "Namestaric": "Name*",
+    "mobileNumberstaric": "Mobile Number*",
+    "selectBusinessTypestaric": "Select Business Type*",
+    "selectProductTypestaric": "Select Products Type*",
+    "detailsestaric": "Details*",
+    "publishers": "Publishers",
+    "corporations": "Corporations",
+    "individual": "Individual",
+    "details": "Details",
+    "selectProductType": "Select Products Type",
+    "bookmarks": "Bookmarks",
+    "books": "Books",
+    "submit": "Submit",
+    "ok": "Ok",
+    "Please": "Please Enter",
+    "phoneValidation": "Phone Number should be between 11 digits to 15 digits"
+  },
+  "Order": {
+    "noBookAvailable": "No Book Available",
+    "nothingshown": "Nothing to Show here!",
+    "EnterSomething": "Enter Something to Search ",
+    "Search": "Search"
+  },
+  "MyProfile": {
+    "myAddressBook": "MY ADDRESS BOOK",
+    "changePassword": "CHANGE PASSWORD"
+  },
+  "AddNewAddress": {
+    "addressName": "Address Name*",
+    "country": "Country*",
+    "state": "State*",
+    "city": "City*",
+    "address": "Address",
+    "addressLine1": "Address Line 1*",
+    "addressline2": "Address Line 2*",
+    "postalCode": "Postal Code",
+    "mobileNumber": "Mobile Number*",
+    "addAddress": "Add Address",
+    "phoneValidation": "Phone Number should be between 11 digits to 15 digits",
+    "useAddress": "USE THIS ADDRESS",
+    "editAddress": "Edit Address",
+    "ok": "Ok",
+    "Please": "Please Enter"
+  },
+  "EditProfile": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Email",
+    "save": "SAVE",
+    "ok": "Ok"
+  },
+  "ChangePassword": {
+    "password": "Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "save": "SAVE",
+    "ok": "Ok",
+    "Please": "Please Enter",
+    "PassNotMatch": "Password does not Match"
+  },
+  "Search": {
+    "bookFound": "Book(s) Found",
+    "noBookAvailable": "No Book Available",
+    "nothingshown": "Nothing to Show here!",
+    "EnterSomething": "Enter Something to Search ",
+    "Search": "Search"
+  },
+  "Filter": {
+    "filter": "FILTER",
+    "filterByGenre": "FILTER BY GENRE",
+    "reset": "Reset",
+    "Romance": "Romance",
+    "Horror": "Horror",
+    "Thriller": "Thriller",
+    "Suspence": "Suspence",
+    "Biography": "Biography",
+    "Mystery": "Mystery",
+    "Action": "Action",
+    "apply": "Apply"
+  },
+  "RequestBook": {
+    "bookTitle": "Book Title*",
+    "Title": "Book Title",
+    "author": "Author Name",
+    "authorName": "Author Name*",
+    "uploadImage": "Upload Image",
+    "restrictionText": "1 Image allowed (PNG,JPEG,JPG) formats ONLY maximum size 5 MB",
+    "sendRequest": "Send Request",
+    "requestEducationalBook": "Request Educational Book",
+    "requestBook": "Request Book",
+    "Please": "Please Enter",
+    "ok": "Ok"
+  },
+  "MyAddressBook": {
+    "myAddressBook": "MY ADDRESS BOOK",
+    "noAddressAvailable": "No Address Available",
+    "addNewAddress": "Add New Address",
+    "myProfile": "My Profile"
+  },
+  "resetPassword": {
+    "resetPassword": "Reset Password",
+    "password": "Password",
+    "email": "Email",
+    "confirm_password": "Confirm Password",
+    "ok": "Ok",
+    "Please": "Please Enter"
+  },
+  "Validation": {
+    "Please": "Please Enter"
+  },
+  "Favorites": {
+    "NoFavorities": "No Items in Favourites"
+  }
+}
