@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { Platform } from 'react-native';
-import { Alert } from 'react-native';
-import { Dimensions } from 'react-native';
-import { RefreshControl, ScrollView } from 'react-native';
+import { RefreshControl, } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
@@ -13,23 +10,15 @@ import {
 
 const Screen = (props) => {
 
-  const [refreshing, setRefreshing] = useState(false);
-
-  const wait = (timeout) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  }
-  const onRefresh = React.useCallback(() => {
-    props?.refresh && props.refresh()
-    // setRefreshing(true);
-    // wait(2000).then(() => setRefreshing(false));
-  }, []);
   const { noPadding, contentPadding } = props;
 
   const getComponent = (key) => {
     const { children } = props;
     return children.filter((view) => view.key === key);
   };
-  const [verticalOffSet, setVerticalOffSet] = useState(false)
+
+
+
   return (
     <>
       {getComponent('header').length ? (
@@ -40,16 +29,11 @@ const Screen = (props) => {
         refreshControl={props.refresh &&
           <RefreshControl
             refreshing={false}
-            onRefresh={onRefresh}
+          // onRefresh={onRefresh}
           />
         }
 
-        onKeyboardWillShow={() => {
-          setVerticalOffSet(true)
-        }}
-        onKeyboardWillHide={() => {
-          setVerticalOffSet(false)
-        }}
+
         style={{
 
         }}
@@ -63,20 +47,7 @@ const Screen = (props) => {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="always"
-        bounces={!props.refresh ? false : true}
-
-
-      // resetScrollToCoords={{ x: 0, y: 0 }}
-      // contentContainerStyle={{ height: heightPercentageToDP(96), flexGrow: 1 }}
-      // automaticallyAdjustContentInsets={true
-      // automaticallyAdjustContentInsets={false}
-      // keyboardDismissMode="on-drag"
-      // scrollsToTop={false}
-      // showsHorizontalScrollIndicator={false}
-      // showsVerticalScrollIndicator={false}
-      // keyboardShouldPersistTaps="never"
-      // bounces={false}
-      >
+        bounces={!props.refresh ? false : true}>
         <View
           style={[
             styles.formContainer,
