@@ -8,12 +8,16 @@ import { navigationRef } from './NavigationService';
 import SignIn from './src/containers/SignIn';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Provider } from 'react-redux';
+import store from './src/redux/store'
 
 const RootStack = createStackNavigator();
 
 const App = props => {
   return (
-    <Navigator ></Navigator>
+    <Provider store={store}>
+      <Navigator ></Navigator>
+    </Provider>
     // <NavigationContainer>
     //   <RootStack.Navigator screenOptions={{
     //     headerShown: false,
