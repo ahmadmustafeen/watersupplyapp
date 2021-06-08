@@ -1,16 +1,18 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 
 import { Screen } from '../../components/common'
 
 const SignIn = props => {
     return (
         <Screen>
+            <View key="header">
 
+            </View>
 
             <View key="content" style={styles.container}>
 
-
+                <Text>DAS</Text>
             </View>
         </Screen>
     )
