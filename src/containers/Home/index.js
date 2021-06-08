@@ -2,15 +2,15 @@ import React from 'react'
 import { Text, View } from 'react-native'
 
 
-const SignIn = props => {
+const Home = props => {
     return (
         <View>
             <Text>
-                SignIn
+                Home
         </Text>
         </View>
     )
 
 }
 
-export default SignIn
+export default Home
