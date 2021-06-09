@@ -13,6 +13,7 @@ const AuthNav = props => {
         <AuthStack.Navigator
             screenOptions={{
                 headerShown: false,
+                initialRouteName: SIGNIN_SCREEN
             }}>
             <AuthStack.Screen name={SIGNIN_SCREEN} component={SignIn} />
         </AuthStack.Navigator>

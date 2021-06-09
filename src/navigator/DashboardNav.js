@@ -1,7 +1,7 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../containers/Home';
-import {HOME, FORM_SCREEN, IMAGE_PICKER_SCREEN} from '../constants/Screens';
+import { HOME, FORM_SCREEN, IMAGE_PICKER_SCREEN } from '../constants/Screens';
 import Form from '../containers/Form';
 import ImagePickerScreen from '../containers/ImagePickerScreen';
 

@@ -1,14 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {useDispatch} from 'react-redux';
-import {AppText} from '../../components/common';
+import { useDispatch } from 'react-redux';
+import { AppText } from '../../components/common';
 import DrawerItem from '../../components/DrawerItem';
-import {SIGNIN_SCREEN} from '../../constants/Screens';
-import {SIGN_IN, SIGN_OUT} from '../../redux/actionTypes';
+import { FORM_SCREEN, SIGNIN_SCREEN } from '../../constants/Screens';
+import { SIGN_IN, SIGN_OUT } from '../../redux/actionTypes';
 
 const DrawerMenu = props => {
   const dispatch = useDispatch();
@@ -37,7 +37,8 @@ const DrawerMenu = props => {
       <View style={styles.drawerItemContainer}>
         <DrawerItem
           title="Sign Out"
-          onPress={() => dispatch({type: SIGN_OUT})}
+          onPress={() => dispatch({ type: SIGN_OUT })}
+        // onPress={() => { props.navigation.navigate(FORM_SCREEN) }}
         />
       </View>
 

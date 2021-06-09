@@ -1,10 +1,10 @@
-import {HOME, SIGNIN_SCREEN} from '../../constants/Screens';
-import {getItem, setItem} from 'helpers/Localstorage';
-import {Alert} from 'react-native';
-import {put} from 'redux-saga/effects';
+import { FORM_SCREEN, HOME, SIGNIN_SCREEN } from '../../constants/Screens';
+import { getItem, setItem } from 'helpers/Localstorage';
+import { Alert } from 'react-native';
+import { put } from 'redux-saga/effects';
 
-import {RestClient} from '../../network/RestClient';
-import {SIGN_OUT_SUCCESS, SIGN_OUT_FAILURE} from '../../redux/actionTypes';
+import { RestClient } from '../../network/RestClient';
+import { SIGN_OUT_SUCCESS, SIGN_OUT_FAILURE } from '../../redux/actionTypes';
 import * as NavigationService from '../../../NavigationService';
 import {
   FETCH_ADDRESS_SUCCESS,
@@ -14,6 +14,7 @@ import {
 } from '../actionTypes';
 export function* signoutSaga() {
   try {
+    // NavigationService.navigate(Aut);
     // let userProfile = yield getItem('@userProfile');
     // userProfile = JSON.parse(userProfile);
     // let signedOutUserProfile = {
@@ -24,7 +25,7 @@ export function* signoutSaga() {
     // console.log(signedOutUserProfile, 'userProfile');
 
     // yield setItem('@userProfile', JSON.stringify(signedOutUserProfile));
-    RestClient.setHeader('Authorization', null);
+    // RestClient.setHeader('Authorization', null);
     // yield put({type: SIGN_OUT_SUCCESS, payload: });
     // yield put({type: FETCH_ORDER_SUCCESS, payload: []});
     // yield put({
@@ -35,10 +36,10 @@ export function* signoutSaga() {
     // yield put({type: FETCH_ADDRESS_SUCCESS, payload: {data: []}});
     NavigationService.navigate('Auth', {
       screen: SIGNIN_SCREEN,
-      params: {cleanBack: true},
+      params: { cleanBack: true },
     });
   } catch (error) {
-    yield put({type: SIGN_OUT_FAILURE, error});
+    yield put({ type: SIGN_OUT_FAILURE, error });
     console.log(error);
   }
 }

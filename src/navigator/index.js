@@ -1,14 +1,15 @@
 /* eslint-disable prettier/prettier */
-import React, {forwardRef, useEffect, useState} from 'react';
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import React, { forwardRef, useEffect, useState } from 'react';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
-import {createStackNavigator} from '@react-navigation/stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import AuthNav from './AuthNav';
 import DrawerMenu from '../containers/DrawerMenu';
 import DashboardNav from './DashboardNav';
-import {HOME, FORM_SCREEN} from '../constants/Screens';
+import { HOME, FORM_SCREEN } from '../constants/Screens';
+import { navigationRef } from '../../NavigationService';
 
 const Drawer = createDrawerNavigator();
 const RootStack = createStackNavigator();
@@ -19,7 +20,7 @@ const DrawerNav = () => {
       initialRouteName={HOME}
       drawerContent={props => <DrawerMenu {...props} />}
       statusBarAnimation="fade"
-      drawerStyle={{backgroundColor: 'transparent', width: '90%'}}
+      drawerStyle={{ backgroundColor: 'transparent', width: '90%' }}
       drawerType="front">
       <Drawer.Screen name="Main" component={DashboardNav} />
     </Drawer.Navigator>
@@ -40,7 +41,7 @@ const navigatorComponent = Auth => {
 
 const Navigator = (props, ref) => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       {/* <RootStack.Navigator> */}
       {navigatorComponent(true)}
       {/* <RootStack.Navigator screenOptions={{
