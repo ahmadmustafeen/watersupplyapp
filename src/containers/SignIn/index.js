@@ -1,13 +1,31 @@
 import React from 'react';
-import {Text, View, StyleSheet, Button, TouchableOpacity} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
-import {Screen} from '../../components/common';
+import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+import { Screen } from '../../components/common';
+import Loader from '../../components/Loader';
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { useDispatch, useSelector } from 'react-redux';
+import { SIGN_IN } from '../../redux/actionTypes';
+import { checkIfLoading } from '../../redux/selectors';
+import { useState } from 'react';
 
 const SignIn = props => {
+
+  const [state, setState] = useState({
+    user_id: ""
+  })
+  const dispatch = useDispatch()
+
+  // const { isLoading } = useSelector((state) => ({
+  //   isLoading: checkIfLoading(state, SIGN_IN),
+  // }));
+
+
+
   return (
     <Screen>
       <View key="header"></View>
@@ -17,16 +35,17 @@ const SignIn = props => {
         <View style={styles.textBox}>
           <TextInput
             style={styles.textBox_input}
-            placeholder="Your Email"></TextInput>
-          <TextInput
+            placeholder="Your Email" onChangeText={(e) => setState({ ...state, "user_id": e })} value={state.user_id}></TextInput>
+          {/* <TextInput
             style={styles.textBox_input}
-            placeholder="Password"></TextInput>
+            placeholder="Password"></TextInput> */}
         </View>
         <Text style={styles.textForgot}>Forgot your password</Text>
 
-        <TouchableOpacity style={styles.butLogin}>
+        <TouchableOpacity style={styles.butLogin} onPress={() => dispatch({ type: SIGN_IN, payload: state })}>
           <Text style={styles.butLoginText}> Login </Text>
         </TouchableOpacity>
+        {/* <Loader loading={isLoading} /> */}
       </View>
 
       {/* <View key="footer" style={styles.footerLogin}>
