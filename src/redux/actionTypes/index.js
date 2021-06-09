@@ -1,7 +1,10 @@
-
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
+
+export const FETCH_TOPIC = 'FETCH_TOPIC';
+export const FETCH_TOPIC_SUCCESS = 'FETCH_TOPIC_SUCCESS';
+export const FETCH_TOPIC_FAILURE = 'FETCH_TOPIC_FAILURE';

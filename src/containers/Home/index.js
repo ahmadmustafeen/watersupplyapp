@@ -4,25 +4,49 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {shallowEqual, useSelector} from 'react-redux';
 import {AppText, Screen} from '../../components/common';
 import DashboardHeader from '../../components/DashboardHeader';
 import DropDownItem from '../../components/DropDownItem';
 
 const Home = props => {
+  const [dropDownItems, setDropDownItems] = useState([
+    {
+      id: '',
+      title: '',
+      description: '',
+    },
+  ]);
+
+  const {topicReducer} = useSelector(state => {
+    return {
+      topicReducer: state.topicReducer,
+    };
+  }, shallowEqual);
+  console.log('topic Reducer', topicReducer);
   return (
     <Screen noPadding>
       <View key="header">
         <DashboardHeader title="ahmad" subTitle="mustafeen" />
       </View>
       <View key="content">
-        <DropDownItem
+        {topicReducer.map(topic => {
+          return (
+            <DropDownItem
+              key={topic.id}
+              title={topic.title}
+              description={topic.description}
+            />
+          );
+        })}
+        {/* <DropDownItem
           title="First"
           description="Here is the info about first"
         />
         <DropDownItem
           title="Second"
           description="Here is the info about second"
-        />
+        />*/}
       </View>
     </Screen>
   );

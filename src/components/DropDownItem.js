@@ -7,10 +7,10 @@ import {
 import {AppText} from './common';
 
 const DropDownItem = props => {
-  const {title, description} = props;
+  const {title, description, key} = props;
   const [visible, setvisible] = useState(false);
   return (
-    <View>
+    <View key={key}>
       <TouchableOpacity
         style={[
           styles.dropdownContainer,
