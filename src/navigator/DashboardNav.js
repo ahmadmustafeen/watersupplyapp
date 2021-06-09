@@ -13,8 +13,8 @@ const DashboardNav = props => {
         headerShown: false,
         initialRouteName: FORM_SCREEN,
       }}>
-      <DashboardStack.Screen name={FORM_SCREEN} component={Form} />
       <DashboardStack.Screen name={HOME} component={Home} />
+      <DashboardStack.Screen name={FORM_SCREEN} component={Form} />
     </DashboardStack.Navigator>
   );
 };

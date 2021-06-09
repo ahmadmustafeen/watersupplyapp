@@ -8,7 +8,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import AuthNav from './AuthNav';
 import DrawerMenu from '../containers/DrawerMenu';
 import DashboardNav from './DashboardNav';
-import {FORM_SCREEN} from '../constants/Screens';
+import {HOME, FORM_SCREEN} from '../constants/Screens';
 
 const Drawer = createDrawerNavigator();
 const RootStack = createStackNavigator();
@@ -16,7 +16,7 @@ const RootStack = createStackNavigator();
 const DrawerNav = () => {
   return (
     <Drawer.Navigator
-      initialRouteName={FORM_SCREEN}
+      initialRouteName={HOME}
       drawerContent={props => <DrawerMenu {...props} />}
       statusBarAnimation="fade"
       drawerStyle={{backgroundColor: 'transparent', width: '90%'}}
