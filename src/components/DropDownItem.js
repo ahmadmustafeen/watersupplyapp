@@ -7,10 +7,10 @@ import {
 import {AppText} from './common';
 
 const DropDownItem = props => {
-  const {title, description, key} = props;
+  const {title, description, onApprove} = props;
   const [visible, setvisible] = useState(false);
   return (
-    <View key={key}>
+    <View>
       <TouchableOpacity
         style={[
           styles.dropdownContainer,
@@ -26,11 +26,12 @@ const DropDownItem = props => {
         <Text>{description}</Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            style={[styles.submitBtn, {backgroundColor: '#f29191'}]}>
+            style={[styles.submitBtn, {backgroundColor: 'red'}]}>
             <AppText size="14">Reject</AppText>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.submitBtn, {backgroundColor: '#9fe6a0'}]}>
+            style={[styles.submitBtn, {backgroundColor: 'green'}]}
+            onPress={onApprove}>
             <AppText size="14">Approve</AppText>
           </TouchableOpacity>
         </View>

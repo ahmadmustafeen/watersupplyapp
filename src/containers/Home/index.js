@@ -4,19 +4,14 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {shallowEqual, useSelector} from 'react-redux';
 import {AppText, Screen} from '../../components/common';
 import DashboardHeader from '../../components/DashboardHeader';
 import DropDownItem from '../../components/DropDownItem';
+import {shallowEqual, useSelector} from 'react-redux';
+import {IMAGE_PICKER_SCREEN} from '../../constants/Screens';
 
 const Home = props => {
-  const [dropDownItems, setDropDownItems] = useState([
-    {
-      id: '',
-      title: '',
-      description: '',
-    },
-  ]);
+  const {navigation} = props;
 
   const {topicReducer} = useSelector(state => {
     return {
@@ -33,6 +28,7 @@ const Home = props => {
         {topicReducer.map(topic => {
           return (
             <DropDownItem
+              onApprove={() => navigation.navigate(IMAGE_PICKER_SCREEN)}
               key={topic.id}
               title={topic.title}
               description={topic.description}
