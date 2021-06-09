@@ -1,16 +1,39 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React, { useState } from 'react'
+import { Text, View, TouchableOpacity, Alert, StyleSheet } from 'react-native'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { AppText, Screen, } from '../../components/common'
+import DashboardHeader from '../../components/DashboardHeader'
+import DropDownItem from '../../components/DropDownItem'
 
 
 const Home = props => {
     return (
-        <View>
-            <Text>
-                Home
-        </Text>
-        </View>
+        <Screen noPadding>
+            <View key="header">
+                <DashboardHeader title="ahmad" subTitle="mustafeen" />
+            </View>
+            <View key="content" >
+                <DropDownItem title="First" description="Here is the info about first" />
+                <DropDownItem title="Second" description="Here is the info about second" />
+
+            </View>
+
+
+        </Screen >
     )
 
 }
-
+const styles = StyleSheet.create({
+    dropdownContainer: {
+        width: wp(100),
+        backgroundColor: 'blue',
+        height: 100
+    },
+    dropdownBox: {
+        display: 'none',
+        width: wp(100),
+        backgroundColor: 'grey',
+        height: 100
+    }
+})
 export default Home
