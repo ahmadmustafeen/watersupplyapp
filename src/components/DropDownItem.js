@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { AppText } from './common'
 
 const DropDownItem = props => {
-    const { title, description } = props
+    const { title, description, onApprove } = props
     const [visible, setvisible] = useState(false)
     return (
         <View>
@@ -20,7 +20,7 @@ const DropDownItem = props => {
                     <TouchableOpacity style={[styles.submitBtn, { backgroundColor: 'red' }]}>
                         <AppText size="14" >Reject</AppText>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.submitBtn, { backgroundColor: 'green' }]}>
+                    <TouchableOpacity style={[styles.submitBtn, { backgroundColor: 'green' }]} onPress={onApprove}>
                         <AppText size="14" >Approve</AppText>
                     </TouchableOpacity>
 
