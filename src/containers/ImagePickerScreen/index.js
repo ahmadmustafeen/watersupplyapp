@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, Image, TouchableOpacity, Text, NativeModules } from 'react-native'
-import { Screen } from '../../components/common'
+import { View, StyleSheet, Image, TouchableOpacity, Text, NativeModules, ScrollView } from 'react-native'
+import { AppText, Screen } from '../../components/common'
 import DashboardHeader from '../../components/DashboardHeader'
 import ImagePicker from 'react-native-image-picker';
 // import ImageCropPicker from 'react-native-image-crop-picker';
-import { heightPercentageToDP } from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 var ImageCropPicker = NativeModules.ImageCropPicker;
 const ImagePickerScreen = props => {
@@ -57,25 +57,38 @@ const ImagePickerScreen = props => {
 
 
     return (
-        <Screen>
+        <Screen noPadding>
             <View key="header">
                 <DashboardHeader />
             </View>
-            <View key="content">
-                <TouchableOpacity onPress={() => selectFromGallery()}><Text>OPEN GALLERY</Text></TouchableOpacity>
-                <TouchableOpacity onPress={setImage}><Text>OPEN CAMERA</Text></TouchableOpacity>
-                {/* <Image source={{ uri: image }} /> */}
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-                    {selectedImage.map(image => {
-                        return (
-                            <TouchableOpacity onLongPress={() => setSelectedImage(selectedImage.filter(selectedimage => selectedimage.uri != image.uri))}>
-                                <Image source={{ uri: image.uri }} style={{ width: 90, height: 100, margin: heightPercentageToDP(1) }} />
-                            </TouchableOpacity>
-                        )
-                    })}
+            <View key="content" style={styles.container}>
+                <ScrollView>
+                    {/* <TouchableOpacity onPress={() => selectFromGallery()}><Text>OPEN GALLERY</Text></TouchableOpacity>
+                <TouchableOpacity onPress={setImage}><Text>OPEN CAMERA</Text></TouchableOpacity> */}
+                    {/* <Image source={{ uri: image }} /> */}
+                    <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', alignSelf: 'center', width: wp(90) }}>
+                        {selectedImage.map(image => {
+                            return (
+                                <TouchableOpacity onLongPress={() => setSelectedImage(selectedImage.filter(selectedimage => selectedimage.uri != image.uri))}>
+                                    <Image source={{ uri: image.uri }} style={{ width: 90, height: 100, margin: hp(1) }} />
+                                </TouchableOpacity>
+                            )
+                        })}
+                    </View>
+
+                </ScrollView>
+                <View style={styles.btnContainer}>
+                    <TouchableOpacity onPress={() => selectFromGallery()} style={[styles.submitBtn,]}>
+                        <AppText size="14">Open Gallery</AppText>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={setImage} style={[styles.submitBtn,]}>
+                        <AppText size="14">Take a Photo</AppText></TouchableOpacity>
 
                 </View>
+                <TouchableOpacity onPress={setImage} style={[styles.submitBtn, { borderRadius: 5, width: wp(40), alignSelf: 'center', backgroundColor: 'rgb(10,200,100)' }]}>
+                    <AppText size="14">Submit</AppText></TouchableOpacity>
             </View>
+
 
         </Screen>
     )
@@ -83,7 +96,25 @@ const ImagePickerScreen = props => {
 
 const styles = StyleSheet.create({
     container: {
+        height: hp(70)
+    },
+    btnContainer: {
+        // position: 'absolute',
+        // bottom: 0,
+        // backgroundColor: 'red',
+        flexDirection: 'row',
+        justifyContent: 'center'
+        // bottom: heightPercentageToDP(0),
+    },
 
-    }
+    submitBtn: {
+        margin: 5,
+        width: wp(35),
+        height: hp(7),
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+        backgroundColor: '#51c4d3',
+    },
 })
 export default ImagePickerScreen
