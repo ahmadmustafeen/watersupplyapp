@@ -1,14 +1,14 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import { Screen } from '../../components/common';
+import { Screen, Button } from '../../components/common';
 import Loader from '../../components/Loader';
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { SIGN_IN } from '../../redux/actionTypes';
 import { checkIfLoading } from '../../redux/selectors';
 import { useState } from 'react';
@@ -18,6 +18,16 @@ const SignIn = props => {
   const [state, setState] = useState({
     user_id: ""
   })
+  const { isLoading } = useSelector((state) => {
+    return {
+      isLoading: checkIfLoading(
+        state,
+        SIGN_IN,
+      )
+    };
+  }, shallowEqual);
+
+
   const dispatch = useDispatch()
 
   // const { isLoading } = useSelector((state) => ({
@@ -31,6 +41,7 @@ const SignIn = props => {
       <View key="header"></View>
 
       <View key="content" style={styles.container}>
+        <Loader loading={isLoading} />
         <Text style={styles.text_login}>Log in</Text>
         <View style={styles.textBox}>
           <TextInput
@@ -42,9 +53,9 @@ const SignIn = props => {
         </View>
         <Text style={styles.textForgot}>Forgot your password</Text>
 
-        <TouchableOpacity style={styles.butLogin} onPress={() => dispatch({ type: SIGN_IN, payload: state })}>
+        <Button style={styles.butLogin} onPress={() => dispatch({ type: SIGN_IN, payload: state })} loading={isLoading}>
           <Text style={styles.butLoginText}> Login </Text>
-        </TouchableOpacity>
+        </Button>
         {/* <Loader loading={isLoading} /> */}
       </View>
 

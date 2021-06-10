@@ -11,17 +11,18 @@ import { RestClient } from '../../network/RestClient'
 //     HIDE_MODAL,
 // } from '../actionTypes';
 import * as NavigationService from '../../../NavigationService';
-import { SIGN_IN_FAILURE } from '../actionTypes';
+import { SHOW_NETWORK_MODAL, SIGN_IN, SIGN_IN_FAILURE } from '../actionTypes';
 import { getItem, setItem } from '../../helpers/LocalStorage';
 import { startAction, stopAction } from '../actions';
+import { NETWORK_ERROR } from 'apisauce';
 
 export function* signinSaga({ payload }) {
 
     try {
-        // yield put(startAction(SIGN_IN));
+        yield put(startAction(SIGN_IN));
         // Alert.alert("SIGN IN")
         yield setItem('@userProfile', JSON.stringify({ username: "Ahmad", token: "34234234" }));
-        NavigationService.navigate(HOME, { Screen: HOME })
+        // NavigationService.navigate(HOME, { Screen: HOME })
         let profile = yield getItem('@userProfile');
 
         profile = JSON.parse(profile)
@@ -34,34 +35,33 @@ export function* signinSaga({ payload }) {
         // };
         // console.log(signInData, "signInData")
         const response = yield call(() =>
-            RestClient.post(API_ENDPOINTS.signin, payload),
+            RestClient.post(API_ENDPOINTS.signin, payload)
         );
-        console.log(response, "response")
-        // if (response.problem === NETWORK_ERROR) {
-        //     return yield put({ type: SHOW_NETWORK_MODAL });
-        // }
-        // const {
-        //     data: { data: res, message, success },
-        // } = response;
+        // console.log(response, "response")
+        if (response.problem === NETWORK_ERROR) {
+            return yield put({ type: SHOW_NETWORK_MODAL });
+        }
+        const {
+            data: { data: res, message, success },
+        } = response;
         // console.log('user', response);
-        // if (success) {
-        //     yield setItem('@userProfile', JSON.stringify(res));
-        //     RestClient.setHeader('Authorization', `Bearer ${res.token}`);
+        if (success) {
+            yield setItem('@userProfile', JSON.stringify(res));
+            RestClient.setHeader('Authorization', `Bearer ${res.token}`);
 
+            NavigationService.navigate(HOME)
 
-        //     if (!NavigationService.navigate(HOME)) NavigationService.navigate("Drawer", { Screen: HOME })
+        } else {
 
-        // } else {
+            const text = "Following username is incorrect or does'nt exist! Try again"
+            Alert.alert(text)
 
-        //     const text = 'Invalid credentials'
-        //     Alert.alert(text)
-
-        //     yield put({ type: SIGN_IN_FAILURE, payload: null });
-        // }
+            yield put({ type: SIGN_IN_FAILURE, payload: null });
+        }
     } catch (error) {
         yield put({ type: SIGN_IN_FAILURE, error });
     }
-    // finally {
-    //     yield put(stopAction(SIGN_IN));
-    // }
+    finally {
+        yield put(stopAction(SIGN_IN))
+    }
 }

@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {AppText} from './common';
+import { AppText } from './common';
 
 const DropDownItem = props => {
-  const {title, description, onApprove} = props;
+  const { title, description, onApprove } = props;
   const [visible, setvisible] = useState(false);
   return (
     <View>
@@ -22,15 +22,15 @@ const DropDownItem = props => {
         onPress={() => setvisible(!visible)}>
         <Text>{title}</Text>
       </TouchableOpacity>
-      <View style={[styles.dropdownBox, visible && {display: 'flex'}]}>
+      <View style={[styles.dropdownBox, visible && { display: 'flex' }]}>
         <Text>{description}</Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            style={[styles.submitBtn, {backgroundColor: 'red'}]}>
+            style={[styles.submitBtn, { backgroundColor: 'rgb(255,50,50)' }]}>
             <AppText size="14">Reject</AppText>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.submitBtn, {backgroundColor: 'green'}]}
+            style={[styles.submitBtn, { backgroundColor: 'rgb(10,200,100)' }]}
             onPress={onApprove}>
             <AppText size="14">Approve</AppText>
           </TouchableOpacity>

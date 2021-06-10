@@ -30,7 +30,13 @@ const DrawerMenu = props => {
       </View>
       <View style={styles.row} />
       <View style={styles.drawerItemContainer}>
-        <DrawerItem title="Home" />
+        <DrawerItem title="All Items" />
+      </View>
+      <View style={styles.drawerItemContainer}>
+        <DrawerItem title="Approved Items" />
+      </View>
+      <View style={styles.drawerItemContainer}>
+        <DrawerItem title="Rejected Items" />
       </View>
       <View style={styles.row} />
 

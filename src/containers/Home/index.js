@@ -1,19 +1,19 @@
-import React, {useState} from 'react';
-import {Text, View, TouchableOpacity, Alert, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {AppText, Screen} from '../../components/common';
+import { AppText, Screen } from '../../components/common';
 import DashboardHeader from '../../components/DashboardHeader';
 import DropDownItem from '../../components/DropDownItem';
-import {shallowEqual, useSelector} from 'react-redux';
-import {IMAGE_PICKER_SCREEN} from '../../constants/Screens';
+import { shallowEqual, useSelector } from 'react-redux';
+import { IMAGE_PICKER_SCREEN } from '../../constants/Screens';
 
 const Home = props => {
-  const {navigation} = props;
+  const { navigation } = props;
 
-  const {topicReducer} = useSelector(state => {
+  const { topicReducer } = useSelector(state => {
     return {
       topicReducer: state.topicReducer,
     };
@@ -22,7 +22,7 @@ const Home = props => {
   return (
     <Screen noPadding>
       <View key="header">
-        <DashboardHeader title="ahmad" subTitle="mustafeen" />
+        <DashboardHeader title="ahmad" subTitle="mustafeen" {...props} />
       </View>
       <View key="content">
         {topicReducer.map(topic => {

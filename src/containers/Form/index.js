@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Alert,
   StyleSheet,
@@ -11,7 +11,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {Screen, AppText, RadioButton} from '../../components/common';
+import { Screen, AppText, RadioButton } from '../../components/common';
+import DashboardHeader from '../../components/DashboardHeader';
 
 const Form = () => {
   const [state, setState] = useState({
@@ -25,7 +26,7 @@ const Form = () => {
   });
 
   const setStateHandler = (key, val) => {
-    setState({...state, [key]: val});
+    setState({ ...state, [key]: val });
   };
 
   const submitHandler = () => {
@@ -45,7 +46,7 @@ const Form = () => {
     <Screen>
       <View key="header">
         <AppText Heading color="blue" center style={styles.header}>
-          Form header
+          <DashboardHeader title="Form" subTitle="Fill this form first" />
         </AppText>
       </View>
 

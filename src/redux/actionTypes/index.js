@@ -1,6 +1,23 @@
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
+
+export const START_ACTION = 'START_ACTION';
+export const STOP_ACTION = 'STOP_ACTION';
+export const REFRESH_ACTION_START = 'REFRESH_ACTION_START';
+export const REFRESH_ACTION_STOP = 'REFRESH_ACTION_STOP';
+
+
+
+export const NETWORK_ERROR = 'NETWORK_ERROR';
+export const NETWORK_INACTIVE = 'NETWORK_INACTIVE';
+export const NETWORK_ACTIVE = 'NETWORK_ACTIVE';
+
+
+export const SHOW_NETWORK_MODAL = 'SHOW_NETWORK_MODAL';
+export const HIDE_NETWORK_MODAL = 'HIDE_NETWORK_MODAL';
+
+
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';

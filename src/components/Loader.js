@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         justifyContent: 'space-around',
-        backgroundColor: 'rgba(0,0,0,0.3)',
+        backgroundColor: 'rgba(0,0,0,0.4)',
         // backgroundColor: 'red'
     },
     activityIndicatorWrapper: {
-        backgroundColor: 'rgba(0,0,0,0.4)',
+        backgroundColor: '#51c4d36f',
         height: hp(10),
         aspectRatio: 1,
         borderRadius: 10,
