@@ -38,15 +38,19 @@ const Home = props => {
         />
       </View>
       <View key="content">
-        {topicReducer.map(topic => (
-          <DropDownItem
-            onApprove={() => navigation.navigate(IMAGE_PICKER_SCREEN, { id: 1 })}
-            key={topic.id}
-            title={topic.title}
-            description={topic.description}
-          />
-        )
-        )}
+        {topicReducer.map(topic => {
+          return (
+            <DropDownItem
+              onApprove={() => navigation.navigate(IMAGE_PICKER_SCREEN, { id: topic.id })}
+              name={topic.name}
+              number={topic.number}
+              address={topic.address}
+              city={topic.city}
+            />
+          );
+        })}
+
+        {/* name number city address */}
         {/* <DropDownItem
           title="First"
           description="Here is the info about first"
