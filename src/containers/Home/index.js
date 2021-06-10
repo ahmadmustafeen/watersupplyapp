@@ -9,7 +9,7 @@ import DashboardHeader from '../../components/DashboardHeader';
 import DropDownItem from '../../components/DropDownItem';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { IMAGE_PICKER_SCREEN } from '../../constants/Screens';
-import { FETCH_APPROVED_TOPIC, FETCH_REJECTED_TOPIC, FETCH_ALL_TOPIC } from '../../redux/actionTypes'
+import { FETCH_PERFORMED_TOPIC } from '../../redux/actionTypes'
 const Home = props => {
   const { navigation, route } = props;
   const id = route.params ? (route.params.id ? route.params.id : 4) : 4
@@ -17,20 +17,21 @@ const Home = props => {
 
   const dispatch = useDispatch()
 
-  // dispatch({ type: FETCH_REJECTED_TOPIC, payload: { id: id } })
+  dispatch({ type: FETCH_PERFORMED_TOPIC, payload: { id: id } })
   // dispatch({ type: FETCH_APPROVED_TOPIC, payload: { id: id } })
   // dispatch({ type: FETCH_ALL_TOPIC, payload: { id: id } })
 
-  const { topicReducer } = useSelector(state => (
+  const { topicReducer, userProfileReducer } = useSelector(state => (
     {
       topicReducer: state.topicReducer,
+      userProfileReducer: state.userProfileReducer,
     }
   ), shallowEqual);
 
 
 
 
-  Alert.alert(id.toString())
+  // Alert.alert(id.toString())
 
 
   return (
@@ -38,12 +39,12 @@ const Home = props => {
       <View key="header">
         <DashboardHeader
           title="ahmad"
-          subTitle="mustafeen"
+
           {...props}
         />
       </View>
       <View key="content">
-        {topicReducer.map(topic => {
+        {id === 4 && topicReducer.map(topic => {
           return (
             <DropDownItem
               type={id}

@@ -4,14 +4,25 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { AppText } from '../../components/common';
 import DrawerItem from '../../components/DrawerItem';
 import { FORM_SCREEN, HOME, HOME_SCREEN, IMAGE_PICKER_SCREEN, SIGNIN_SCREEN } from '../../constants/Screens';
 import { SIGN_IN, SIGN_OUT } from '../../redux/actionTypes';
 
 const DrawerMenu = (props) => {
-  // console.log(navigation.navigate(HOME))
+  const { UserProfileReducer } = useSelector(state => (
+    {
+
+      UserProfileReducer: state.UserProfileReducer,
+    }
+  ), shallowEqual);
+
+  console.log("userProfileReducer", UserProfileReducer)
+
+
+
+
 
   const dispatch = useDispatch();
 
@@ -19,8 +30,8 @@ const DrawerMenu = (props) => {
     <View style={styles.container}>
       <View style={styles.containerHeader}>
         <View style={styles.headerText}>
-          <AppText heading>Title</AppText>
-          <AppText>View and Edit your Profile</AppText>
+          <AppText heading>{(UserProfileReducer?.name).toString()}</AppText>
+          <AppText>{(UserProfileReducer?.username).toString()}</AppText>
         </View>
         <View style={styles.headerImage}>
           <Image source={require('../../assets/images/noUser.png')} />

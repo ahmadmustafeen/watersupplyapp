@@ -16,6 +16,7 @@ import {
     SHOW_NETWORK_MODAL,
     SIGN_IN,
     SIGN_IN_FAILURE,
+    SIGN_IN_SUCCESS,
 } from '../actionTypes';
 import { getItem, setItem } from '../../helpers/LocalStorage';
 import { startAction, stopAction } from '../actions';
@@ -24,35 +25,27 @@ import { NETWORK_ERROR } from 'apisauce';
 export function* signinSaga({ payload }) {
     try {
         yield put(startAction(SIGN_IN));
-        // Alert.alert("SIGN IN")
-        // yield setItem('@userProfile', JSON.stringify({ username: "Ahmad", token: "34234234" }));
-        // NavigationService.navigate(HOME, { Screen: HOME })
-        // let profile = yield getItem('@userProfile');
 
-        // profile = JSON.parse(profile)
-        // yield put(startAction(SIGN_IN));
-        // const { email, password } = payload;
-
-        // const signInData = {
-        //     email,
-        //     password,
-        // };
-        // console.log(signInData, "signInData")
         const response = yield call(() =>
             RestClient.post(API_ENDPOINTS.signin, payload),
         );
-        // console.log(response, "response")
+        console.log(response, "response")
         if (response.problem === NETWORK_ERROR) {
             return yield put({ type: SHOW_NETWORK_MODAL });
         }
         const {
-            data: { data: res, message, success },
+            data: { data: res, message, status },
         } = response;
         // console.log('user', response);
-        if (response.status == 200) {
+        if (status) {
             yield put({ type: FETCH_TOPIC_SUCCESS, payload: response.data.data.task });
-            yield setItem('@userProfile', JSON.stringify(res));
+            // console.log("RES", res,)
+            yield setItem('@userProfile', JSON.stringify({ token: res.token, user_id: res.username }));
+            // const userProfile = yield getItem('@userProfile')
+            // console.log(JSON.parse(userProfile), "@userProfile")
             RestClient.setHeader('Authorization', `Bearer ${res.token}`);
+            yield put({ type: SIGN_IN_SUCCESS, payload: res });
+
 
             NavigationService.navigate(HOME);
         } else {

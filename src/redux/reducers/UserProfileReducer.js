@@ -7,9 +7,6 @@ import {
 import { PUSH_NOTIFICATION_FUNCTION_REDUCER, SWITCH_CURRENCY_SUCCESS } from '../actionTypes';
 
 const initialState = {
-    currency: { id: 1, iso: 'KWD', name: 'Kuwaiti dinar', symbol: 'KD' },
-    notification: 1,
-    language_presence: true
 };
 
 export default (state = initialState, action) => {

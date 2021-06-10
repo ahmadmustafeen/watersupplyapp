@@ -8,7 +8,7 @@ import { AppText } from './common';
 
 const DropDownItem = props => {
   const { name, number, address, city, onApprove, type } = props;
-  console.log(type)
+  // console.log(type)
   const [visible, setvisible] = useState(false);
   return (
     <View>
