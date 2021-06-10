@@ -1,0 +1,78 @@
+import { HOME } from '../../constants/Screens';
+// import { setItem } from 'helpers/Localstorage';
+import { Alert } from 'react-native';
+import { put, call, all, select } from 'redux-saga/effects';
+import { API_ENDPOINTS } from '../../constants/Network';
+import { RestClient } from '../../network/RestClient';
+
+// import {
+//     SIGN_IN_FAILURE,
+//     SIGN_IN_SUCCESS,
+//     HIDE_MODAL,
+// } from '../actionTypes';
+import * as NavigationService from '../../../NavigationService';
+import {
+    FETCH_PERFORMED_TOPIC,
+    FETCH_PERFORMED_TOPIC_FAILURE,
+    FETCH_PERFORMED_TOPIC_SUCCESS,
+    FETCH_TOPIC_SUCCESS,
+    SHOW_NETWORK_MODAL,
+    SIGN_IN,
+    SIGN_IN_FAILURE,
+} from '../actionTypes';
+import { getItem, setItem } from '../../helpers/LocalStorage';
+import { startAction, stopAction } from '../actions';
+import { NETWORK_ERROR } from 'apisauce';
+
+export function* submitImageSaga({ payload }) {
+    // const { id } = payload;
+    console.log(payload, "payload")
+    // console.log(data, "data")
+    // const id = 2
+    try {
+        const data = { task_id: payload.id, images: payload.selectedImage, }
+
+        //     let userProfile = yield getItem('@userProfile')
+        //     userProfile = JSON.parse(userProfile)
+        //     const data = { num: id, user_id: userProfile.user_id }
+        //     console.log(data, "data")
+
+
+        //     // console.log(JSON.parse(userProfile), "@userProfile")
+        //     yield put(startAction(FETCH_PERFORMED_TOPIC));
+        let userProfile = yield getItem('@userProfile');
+        userProfile = JSON.parse(userProfile);
+        RestClient.setHeader('Authorization', `Bearer ${userProfile.token}`);
+        console.log("payload.selectedImage,", payload.selectedImage)
+        const form_data = new FormData();
+        form_data.append('images', payload.selectedImage[0]);
+        form_data.append('task_id', payload.id);
+        console.log(form_data, "form_data")
+        // form_data.append('author_name', payload.author_name);
+        const response = yield call(() =>
+
+            RestClient.post(API_ENDPOINTS.image, form_data),
+        );
+        console.log(response, "response")
+        //     // if (response.problem === NETWORK_ERROR) {
+        //     //     return yield put({ type: SHOW_NETWORK_MODAL });
+        //     // }
+        //     const {
+        //         data: { data: res, message, success },
+        //     } = response;
+        //     // // console.log('user', response);
+        //     if (response.status == 200) {
+        //         yield put({ type: FETCH_PERFORMED_TOPIC_SUCCESS, payload: response.data.data });
+        //     } else {
+        //         const text =
+        //             "Something went Wrong Fetching the data";
+        //         Alert.alert(text);
+
+        //         yield put({ type: FETCH_PERFORMED_TOPIC_FAILURE, payload: null });
+        //     }
+    } catch (error) {
+        // yield put({ type: SIGN_IN_FAILURE, error });
+    } finally {
+        // yield put(stopAction(FETCH_PERFORMED_TOPIC));
+    }
+}

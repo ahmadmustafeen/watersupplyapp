@@ -5,5 +5,6 @@ export const API_VERSION = 'api/v1';
 export const API_ENDPOINTS = {
     signin: '/login',
     all_task: '/all_task',
-    approval: '/approval'
+    approval: '/approval',
+    image: '/image'
 };

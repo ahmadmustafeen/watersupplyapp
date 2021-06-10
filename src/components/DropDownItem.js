@@ -29,14 +29,14 @@ const DropDownItem = props => {
         <Text>{city}</Text>
         <View style={styles.buttonContainer}>
 
-          {(type === 2 || type == 4 || done_rejected === 'Rejected') && <TouchableOpacity
+          {(type == 4 || ((done_rejected === 'Rejected' || done_rejected === null))) && <TouchableOpacity
             style={[styles.submitBtn, { backgroundColor: 'rgb(255,50,50)' }]}>
-            <AppText size="14">{type == 4 ? "Reject" : "Rejected"}</AppText>
+            <AppText size="14">{(type == 4 || done_rejected === null) ? "Reject" : "Rejected"}</AppText>
           </TouchableOpacity>}
-          {(type === 3 || type == 4 || done_rejected === 'Done') && <TouchableOpacity
+          {(type == 4 || ((done_rejected === 'Done' || done_rejected === null))) && <TouchableOpacity
             style={[styles.submitBtn, { backgroundColor: 'rgb(10,200,100)' }]}
-            onPress={type != 4 ? onApprove : null}>
-            <AppText size="14">{type == 4 ? "Approve" : "Approved"}</AppText>
+            onPress={(type != 4 || done_rejected !== null) ? onApprove : null}>
+            <AppText size="14">{(type == 4 || done_rejected === null) ? "Approve" : "Approved"}</AppText>
           </TouchableOpacity>}
         </View>
       </View>

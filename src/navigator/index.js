@@ -52,7 +52,7 @@ const Navigator = (props, ref) => {
   const Add = async () => {
     try {
       const valueString = await AsyncStorage.getItem('@userProfile');
-      setLoggedIn(JSON.parse(valueString))
+      setLoggedIn(!!JSON.parse(valueString).token)
       console.log(loggedIn, "Value")
     } catch (error) {
       console.error(error);
@@ -62,7 +62,7 @@ const Navigator = (props, ref) => {
   return (
     <NavigationContainer ref={navigationRef}>
       {/* <RootStack.Navigator> */}
-      {loaded ? navigatorComponent(!loggedIn) : null}
+      {loaded ? navigatorComponent(loggedIn) : null}
 
       {/* <RootStack.Navigator screenOptions={{
                     headerShown: false,

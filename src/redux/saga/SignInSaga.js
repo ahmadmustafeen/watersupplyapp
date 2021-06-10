@@ -25,9 +25,10 @@ import { NETWORK_ERROR } from 'apisauce';
 export function* signinSaga({ payload }) {
     try {
         yield put(startAction(SIGN_IN));
-
+        const userProfile = yield getItem('@userProfile')
+        let temp_id = JSON.parse(userProfile)?.user_id
         const response = yield call(() =>
-            RestClient.post(API_ENDPOINTS.signin, payload),
+            RestClient.post(API_ENDPOINTS.signin, { user_id: payload.user_id ? payload.user_id : temp_id }),
         );
         console.log(response, "response")
         if (response.problem === NETWORK_ERROR) {
@@ -41,8 +42,7 @@ export function* signinSaga({ payload }) {
             yield put({ type: FETCH_TOPIC_SUCCESS, payload: response.data.data.task });
             // console.log("RES", res,)
             yield setItem('@userProfile', JSON.stringify({ token: res.token, user_id: res.username }));
-            // const userProfile = yield getItem('@userProfile')
-            // console.log(JSON.parse(userProfile), "@userProfile")
+
             RestClient.setHeader('Authorization', `Bearer ${res.token}`);
             yield put({ type: SIGN_IN_SUCCESS, payload: res });
 

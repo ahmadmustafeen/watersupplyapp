@@ -9,7 +9,7 @@ import DashboardHeader from '../../components/DashboardHeader';
 import DropDownItem from '../../components/DropDownItem';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { IMAGE_PICKER_SCREEN } from '../../constants/Screens';
-import { FETCH_PERFORMED_TOPIC } from '../../redux/actionTypes'
+import { FETCH_PERFORMED_TOPIC, SIGN_IN } from '../../redux/actionTypes'
 import { checkIfLoading } from '../../redux/selectors';
 import Loader from '../../components/Loader';
 const Home = props => {
@@ -20,7 +20,12 @@ const Home = props => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (id != 4) dispatch({ type: FETCH_PERFORMED_TOPIC, payload: { id: id } })
+    if (id != 4) {
+      dispatch({ type: FETCH_PERFORMED_TOPIC, payload: { id: id } })
+    }
+    else {
+      dispatch({ type: SIGN_IN, payload: { user_id: userProfileReducer?.username } })
+    }
 
   }, [id])
   // dispatch({ type: FETCH_APPROVED_TOPIC, payload: { id: id } })
@@ -34,6 +39,7 @@ const Home = props => {
       isLoading: checkIfLoading(
         state,
         FETCH_PERFORMED_TOPIC,
+        SIGN_IN,
       )
     }
   ), shallowEqual);
@@ -48,7 +54,7 @@ const Home = props => {
     <Screen noPadding>
       <View key="header">
         <DashboardHeader
-          title="ahmad"
+          title={id === 3 ? "All Task" : id === 1 ? "Approved Task" : id === 2 ? "Rejected Task" : "Foopanda Alt"}
 
           {...props}
         />
@@ -56,10 +62,12 @@ const Home = props => {
       <View key="content">
         <Loader loading={isLoading} />
         {id === 4 ? topicReducer.map(topic => {
+
           return (
             <DropDownItem
               type={id}
               onApprove={() => navigation.navigate(IMAGE_PICKER_SCREEN, { id: topic.id })}
+              // onApprove={() => Alert.alert(topic.id.toString())}
               name={topic.name}
               number={topic.number}
               address={topic.address}

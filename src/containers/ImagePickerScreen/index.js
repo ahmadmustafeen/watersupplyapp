@@ -6,12 +6,16 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { FORM_SCREEN } from '../../constants/Screens';
+import { useDispatch } from 'react-redux';
+import { SUBMIT_IMAGES } from '../../redux/actionTypes';
 
 // var ImageCropPicker = NativeModules.ImageCropPicker;
 const ImagePickerScreen = props => {
 
-    const { id = 4 } = props?.route?.params?.id
 
+    const dispatch = useDispatch()
+    // const { id } = props?.route?.params?.id
+    const id = 4
     const [state, setState] = useState({ id, selectedImage: [] })
 
 
@@ -59,12 +63,15 @@ const ImagePickerScreen = props => {
                     console.log('User tapped custom button: ', response.customButton);
                 } else {
                     setState({
-                        ...state, selectedImage: [...state.selectedImage, {
-                            uri: Platform.OS == 'ios' ? response.uri.replace("file://", "/private") : response.uri,
-                            type: response.type,
-                            name: Platform.OS == 'ios' ? "placeholder_text" : response.fileName,
-                        }]
+                        ...state, selectedImage: [...state.selectedImage, { uri: response.uri, type: response.type, name: response.fileName }]
                     })
+                    // setState({
+                    //     ...state, selectedImage: [...state.selectedImage, {
+                    //         uri: Platform.OS == 'ios' ? response.uri.replace("file://", "/private") : response.uri,
+                    //         type: response.type,
+                    //         name: Platform.OS == 'ios' ? "placeholder_text" : response.fileName,
+                    //     }]
+                    // })
                 }
             }
         )
@@ -84,7 +91,7 @@ const ImagePickerScreen = props => {
             }
         },])
     }
-    console.log(state)
+    console.log(state, "IMAGE")
     return (
         <Screen noPadding>
             <View key="header">
@@ -119,7 +126,7 @@ const ImagePickerScreen = props => {
                 <TouchableOpacity
                     style={[styles.submitBtn,
                     { borderRadius: 5, width: wp(40), alignSelf: 'center', backgroundColor: 'rgb(10,200,100)' }]}
-                    onPress={() => props.navigation.navigate(FORM_SCREEN)}
+                    onPress={() => dispatch({ type: SUBMIT_IMAGES, payload: { ...state } })}
                 >
                     <AppText size="14">Submit</AppText></TouchableOpacity>
             </View>

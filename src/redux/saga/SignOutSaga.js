@@ -1,5 +1,4 @@
 import { FORM_SCREEN, HOME, SIGNIN_SCREEN } from '../../constants/Screens';
-import { getItem, setItem } from 'helpers/Localstorage';
 import { Alert } from 'react-native';
 import { put } from 'redux-saga/effects';
 
@@ -12,10 +11,11 @@ import {
   FETCH_USER_CART_SUCCESS,
   FETCH_USER_FAVOURITE_SUCCESS,
 } from '../actionTypes';
+import { setItem } from '../../helpers/LocalStorage';
 export function* signoutSaga() {
   try {
     // NavigationService.navigate(Aut);
-    // let userProfile = yield getItem('@userProfile');
+    yield setItem('@userProfile', JSON.stringify({}));
     // userProfile = JSON.parse(userProfile);
     // let signedOutUserProfile = {
     //   language: userProfile.language,

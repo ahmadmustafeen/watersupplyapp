@@ -45,14 +45,14 @@ const DrawerMenu = (props) => {
       <View style={styles.drawerItemContainer}>
         <DrawerItem title="All Items"
           onPress={() => {
-            props.navigation.navigate(HOME_SCREEN, { id: 1 })
+            props.navigation.navigate(HOME_SCREEN, { id: 3 })
           }}
         />
       </View>
       <View style={styles.drawerItemContainer}>
         <DrawerItem title="Approved Items"
           onPress={() => {
-            props.navigation.navigate(HOME_SCREEN, { id: 3 })
+            props.navigation.navigate(HOME_SCREEN, { id: 1 })
           }}
         />
       </View>
