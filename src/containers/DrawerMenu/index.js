@@ -30,8 +30,8 @@ const DrawerMenu = (props) => {
     <View style={styles.container}>
       <View style={styles.containerHeader}>
         <View style={styles.headerText}>
-          <AppText heading>{(UserProfileReducer?.name).toString()}</AppText>
-          <AppText>{(UserProfileReducer?.username).toString()}</AppText>
+          <AppText heading>{(UserProfileReducer?.name)?.toString()}</AppText>
+          <AppText>{(UserProfileReducer?.username)?.toString()}</AppText>
         </View>
         <View style={styles.headerImage}>
           <Image source={require('../../assets/images/noUser.png')} />

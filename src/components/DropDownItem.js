@@ -7,7 +7,7 @@ import {
 import { AppText } from './common';
 
 const DropDownItem = props => {
-  const { name, number, address, city, onApprove, type } = props;
+  const { name, number, address, city, onApprove, type, done_rejected } = props;
   // console.log(type)
   const [visible, setvisible] = useState(false);
   return (
@@ -29,11 +29,11 @@ const DropDownItem = props => {
         <Text>{city}</Text>
         <View style={styles.buttonContainer}>
 
-          {(type === 2 || type == 4) && <TouchableOpacity
+          {(type === 2 || type == 4 || done_rejected === 'Rejected') && <TouchableOpacity
             style={[styles.submitBtn, { backgroundColor: 'rgb(255,50,50)' }]}>
             <AppText size="14">{type == 4 ? "Reject" : "Rejected"}</AppText>
           </TouchableOpacity>}
-          {(type === 3 || type == 4) && <TouchableOpacity
+          {(type === 3 || type == 4 || done_rejected === 'Done') && <TouchableOpacity
             style={[styles.submitBtn, { backgroundColor: 'rgb(10,200,100)' }]}
             onPress={type != 4 ? onApprove : null}>
             <AppText size="14">{type == 4 ? "Approve" : "Approved"}</AppText>

@@ -12,6 +12,9 @@ import { RestClient } from '../../network/RestClient';
 // } from '../actionTypes';
 import * as NavigationService from '../../../NavigationService';
 import {
+    FETCH_PERFORMED_TOPIC,
+    FETCH_PERFORMED_TOPIC_FAILURE,
+    FETCH_PERFORMED_TOPIC_SUCCESS,
     FETCH_TOPIC_SUCCESS,
     SHOW_NETWORK_MODAL,
     SIGN_IN,
@@ -22,36 +25,42 @@ import { startAction, stopAction } from '../actions';
 import { NETWORK_ERROR } from 'apisauce';
 
 export function* fetchPerformedTopicSaga({ payload }) {
+    const { id } = payload;
+    // const id = 2
     try {
-        yield put(startAction(SIGN_IN));
+
+        let userProfile = yield getItem('@userProfile')
+        userProfile = JSON.parse(userProfile)
+        const data = { num: id, user_id: userProfile.user_id }
+        console.log(data, "data")
+
+
+        // console.log(JSON.parse(userProfile), "@userProfile")
+        yield put(startAction(FETCH_PERFORMED_TOPIC));
 
         const response = yield call(() =>
-            RestClient.post(API_ENDPOINTS.signin, payload),
+            RestClient.post(true ? API_ENDPOINTS.all_task : API_ENDPOINTS.approval, data),
         );
-        // console.log(response, "response")
-        if (response.problem === NETWORK_ERROR) {
-            return yield put({ type: SHOW_NETWORK_MODAL });
-        }
+        console.log(response, "response")
+        // if (response.problem === NETWORK_ERROR) {
+        //     return yield put({ type: SHOW_NETWORK_MODAL });
+        // }
         const {
             data: { data: res, message, success },
         } = response;
-        // console.log('user', response);
+        // // console.log('user', response);
         if (response.status == 200) {
-            yield put({ type: FETCH_TOPIC_SUCCESS, payload: response.data.data.task });
-            yield setItem('@userProfile', JSON.stringify(res));
-            RestClient.setHeader('Authorization', `Bearer ${res.token}`);
-
-            NavigationService.navigate(HOME);
+            yield put({ type: FETCH_PERFORMED_TOPIC_SUCCESS, payload: response.data.data });
         } else {
             const text =
-                "Following username is incorrect or does'nt exist! Try again";
+                "Something went Wrong Fetching the data";
             Alert.alert(text);
 
-            yield put({ type: SIGN_IN_FAILURE, payload: null });
+            yield put({ type: FETCH_PERFORMED_TOPIC_FAILURE, payload: null });
         }
     } catch (error) {
-        yield put({ type: SIGN_IN_FAILURE, error });
+        // yield put({ type: SIGN_IN_FAILURE, error });
     } finally {
-        yield put(stopAction(SIGN_IN));
+        yield put(stopAction(FETCH_PERFORMED_TOPIC));
     }
 }

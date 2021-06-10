@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -10,6 +10,8 @@ import DropDownItem from '../../components/DropDownItem';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { IMAGE_PICKER_SCREEN } from '../../constants/Screens';
 import { FETCH_PERFORMED_TOPIC } from '../../redux/actionTypes'
+import { checkIfLoading } from '../../redux/selectors';
+import Loader from '../../components/Loader';
 const Home = props => {
   const { navigation, route } = props;
   const id = route.params ? (route.params.id ? route.params.id : 4) : 4
@@ -17,14 +19,22 @@ const Home = props => {
 
   const dispatch = useDispatch()
 
-  dispatch({ type: FETCH_PERFORMED_TOPIC, payload: { id: id } })
+  useEffect(() => {
+    if (id != 4) dispatch({ type: FETCH_PERFORMED_TOPIC, payload: { id: id } })
+
+  }, [id])
   // dispatch({ type: FETCH_APPROVED_TOPIC, payload: { id: id } })
   // dispatch({ type: FETCH_ALL_TOPIC, payload: { id: id } })
 
-  const { topicReducer, userProfileReducer } = useSelector(state => (
+  const { topicReducer, userProfileReducer, Performedtopic, isLoading } = useSelector(state => (
     {
       topicReducer: state.topicReducer,
       userProfileReducer: state.userProfileReducer,
+      Performedtopic: state.Performedtopic,
+      isLoading: checkIfLoading(
+        state,
+        FETCH_PERFORMED_TOPIC,
+      )
     }
   ), shallowEqual);
 
@@ -44,7 +54,8 @@ const Home = props => {
         />
       </View>
       <View key="content">
-        {id === 4 && topicReducer.map(topic => {
+        <Loader loading={isLoading} />
+        {id === 4 ? topicReducer.map(topic => {
           return (
             <DropDownItem
               type={id}
@@ -55,7 +66,24 @@ const Home = props => {
               city={topic.city}
             />
           );
-        })}
+        }) :
+          // console.log(Performedtopic)
+          Performedtopic.map(topic => {
+            return (
+              <DropDownItem
+                type={id}
+                onApprove={() => navigation.navigate(IMAGE_PICKER_SCREEN, { id: topic.id })}
+                name={topic.name}
+                number={topic.number}
+                address={topic.address}
+                city={topic.city}
+                done_rejected={topic.done_rejected}
+              />
+            );
+          })
+
+
+        }
 
         {/* name number city address */}
         {/* <DropDownItem
