@@ -52,8 +52,7 @@ const SignIn = props => {
             placeholder="Password"></TextInput> */}
         </View>
         <Text style={styles.textForgot}>Forgot your password</Text>
-
-        <Button style={styles.butLogin} onPress={() => dispatch({ type: SIGN_IN, payload: state })} loading={isLoading}>
+        <Button style={styles.butLogin} onPress={() => dispatch({ type: SIGN_IN, payload: state })} >
           <Text style={styles.butLoginText}> Login </Text>
         </Button>
         {/* <Loader loading={isLoading} /> */}

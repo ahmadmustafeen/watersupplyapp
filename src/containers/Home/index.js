@@ -13,28 +13,40 @@ import { IMAGE_PICKER_SCREEN } from '../../constants/Screens';
 const Home = props => {
   const { navigation } = props;
 
-  const { topicReducer } = useSelector(state => {
-    return {
+
+
+
+  const { topicReducer } = useSelector(state => (
+    {
       topicReducer: state.topicReducer,
-    };
-  }, shallowEqual);
-  console.log('topic Reducer', topicReducer);
+    }
+  ), shallowEqual);
+
+
+
+
+
+
+
   return (
     <Screen noPadding>
       <View key="header">
-        <DashboardHeader title="ahmad" subTitle="mustafeen" {...props} />
+        <DashboardHeader
+          title="ahmad"
+          subTitle="mustafeen"
+          {...props}
+        />
       </View>
       <View key="content">
-        {topicReducer.map(topic => {
-          return (
-            <DropDownItem
-              onApprove={() => navigation.navigate(IMAGE_PICKER_SCREEN)}
-              key={topic.id}
-              title={topic.title}
-              description={topic.description}
-            />
-          );
-        })}
+        {topicReducer.map(topic => (
+          <DropDownItem
+            onApprove={() => navigation.navigate(IMAGE_PICKER_SCREEN, { id: 1 })}
+            key={topic.id}
+            title={topic.title}
+            description={topic.description}
+          />
+        )
+        )}
         {/* <DropDownItem
           title="First"
           description="Here is the info about first"

@@ -44,8 +44,8 @@ export function* signinSaga({ payload }) {
         const {
             data: { data: res, message, success },
         } = response;
-        // console.log('user', response);
-        if (success) {
+        console.log('user', response);
+        if (response.status == 200) {
             yield setItem('@userProfile', JSON.stringify(res));
             RestClient.setHeader('Authorization', `Bearer ${res.token}`);
 

@@ -14,7 +14,7 @@ import {
 import { Screen, AppText, RadioButton } from '../../components/common';
 import DashboardHeader from '../../components/DashboardHeader';
 
-const Form = () => {
+const Form = props => {
   const [state, setState] = useState({
     name: '',
     email: '',
@@ -46,7 +46,10 @@ const Form = () => {
     <Screen>
       <View key="header">
         <AppText Heading color="blue" center style={styles.header}>
-          <DashboardHeader title="Form" subTitle="Fill this form first" />
+          <DashboardHeader
+            {...props}
+            title="Form"
+            subTitle="Fill this form first" />
         </AppText>
       </View>
 
