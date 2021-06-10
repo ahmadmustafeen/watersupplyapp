@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {AppText} from './common';
+import { AppText } from './common';
 
 const DropDownItem = props => {
-  const {name, number, address, city, onApprove} = props;
+  const { name, number, address, city, onApprove, type } = props;
+  console.log(type)
   const [visible, setvisible] = useState(false);
   return (
     <View>
@@ -22,23 +23,24 @@ const DropDownItem = props => {
         onPress={() => setvisible(!visible)}>
         <Text>{name}</Text>
       </TouchableOpacity>
-      <View style={[styles.dropdownBox, visible && {display: 'flex'}]}>
+      <View style={[styles.dropdownBox, visible && { display: 'flex' }]}>
         <Text>{number}</Text>
         <Text>{address}</Text>
         <Text>{city}</Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[styles.submitBtn, {backgroundColor: 'rgb(255,50,50)'}]}>
-            <AppText size="14">Reject</AppText>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.submitBtn, {backgroundColor: 'rgb(10,200,100)'}]}
-            onPress={onApprove}>
-            <AppText size="14">Approve</AppText>
-          </TouchableOpacity>
+
+          {(type === 2 || type == 4) && <TouchableOpacity
+            style={[styles.submitBtn, { backgroundColor: 'rgb(255,50,50)' }]}>
+            <AppText size="14">{type == 4 ? "Reject" : "Rejected"}</AppText>
+          </TouchableOpacity>}
+          {(type === 3 || type == 4) && <TouchableOpacity
+            style={[styles.submitBtn, { backgroundColor: 'rgb(10,200,100)' }]}
+            onPress={type != 4 ? onApprove : null}>
+            <AppText size="14">{type == 4 ? "Approve" : "Approved"}</AppText>
+          </TouchableOpacity>}
         </View>
       </View>
-    </View>
+    </View >
   );
 };
 
@@ -58,7 +60,8 @@ const styles = StyleSheet.create({
     display: 'none',
     width: wp(90),
     alignSelf: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255,255,255,1)',
+    // height: 100,
     padding: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,

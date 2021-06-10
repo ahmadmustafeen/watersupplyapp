@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -7,10 +7,12 @@ import {
 import { useDispatch } from 'react-redux';
 import { AppText } from '../../components/common';
 import DrawerItem from '../../components/DrawerItem';
-import { FORM_SCREEN, SIGNIN_SCREEN } from '../../constants/Screens';
+import { FORM_SCREEN, HOME, HOME_SCREEN, IMAGE_PICKER_SCREEN, SIGNIN_SCREEN } from '../../constants/Screens';
 import { SIGN_IN, SIGN_OUT } from '../../redux/actionTypes';
 
-const DrawerMenu = props => {
+const DrawerMenu = (props) => {
+  // console.log(navigation.navigate(HOME))
+
   const dispatch = useDispatch();
 
   return (
@@ -30,13 +32,25 @@ const DrawerMenu = props => {
       </View>
       <View style={styles.row} />
       <View style={styles.drawerItemContainer}>
-        <DrawerItem title="All Items" />
+        <DrawerItem title="All Items"
+          onPress={() => {
+            props.navigation.navigate(HOME_SCREEN, { id: 1 })
+          }}
+        />
       </View>
       <View style={styles.drawerItemContainer}>
-        <DrawerItem title="Approved Items" />
+        <DrawerItem title="Approved Items"
+          onPress={() => {
+            props.navigation.navigate(HOME_SCREEN, { id: 3 })
+          }}
+        />
       </View>
       <View style={styles.drawerItemContainer}>
-        <DrawerItem title="Rejected Items" />
+        <DrawerItem title="Rejected Items"
+          onPress={() => {
+            props.navigation.navigate(HOME_SCREEN, { id: 2 })
+          }}
+        />
       </View>
       <View style={styles.row} />
 

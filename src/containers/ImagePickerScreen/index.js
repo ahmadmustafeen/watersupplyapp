@@ -10,7 +10,7 @@ import { FORM_SCREEN } from '../../constants/Screens';
 // var ImageCropPicker = NativeModules.ImageCropPicker;
 const ImagePickerScreen = props => {
 
-    const { id } = props.route.params.id
+    const { id = 4 } = props?.route?.params?.id
 
     const [state, setState] = useState({ id, selectedImage: [] })
 

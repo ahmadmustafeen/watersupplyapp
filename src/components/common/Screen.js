@@ -35,6 +35,7 @@ const Screen = (props) => {
 
 
         style={{
+          // backgroundColor: 'rgba(0,0,0,0.1)',
 
         }}
         // contentContainerStyle={[{ flexGrow: 1 },]}
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    // backgroundColor: 'red',
     margin: wp('5%'),
     marginBottom: hp('0.75%'),
   },

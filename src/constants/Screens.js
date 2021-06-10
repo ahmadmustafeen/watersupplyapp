@@ -6,5 +6,6 @@ export const FORGOT_PASSWORD_SCREEN = 'ForgotPassword';
 export const AD_SCREEN = 'AdScreen';
 export const FORM_SCREEN = 'FORM_SCREEN';
 export const IMAGE_PICKER_SCREEN = 'ImagePickerScreen';
+export const HOME_SCREEN = "HOME_SCREEN"
 // export const AD_SCREEN = 'AdScreen';
 // export const AD_SCREEN = 'AdScreen';

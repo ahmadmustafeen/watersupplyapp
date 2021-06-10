@@ -22,8 +22,8 @@ const DashboardHeader = props => {
         />
       </View>
       <View style={styles.innerContainer}>
-        <AppText size="24">{title}</AppText>
-        <AppText size="16">{subTitle}</AppText>
+        <AppText size="18" bold capitalize style={{ paddingRight: 10 }}>{title}</AppText>
+        <AppText size="14">{subTitle}</AppText>
       </View>
     </View>
   );
@@ -31,7 +31,7 @@ const DashboardHeader = props => {
 const styles = StyleSheet.create({
   container: {
     width: wp(100),
-    height: hp(20),
+    height: hp(10),
     flexDirection: 'row',
     backgroundColor: '#51c4d3',
   },
@@ -44,9 +44,11 @@ const styles = StyleSheet.create({
   innerContainer: {
     width: wp(70),
     paddingLeft: wp(2),
-    height: hp(20),
-    justifyContent: 'center',
-    alignSelf: 'center',
+    // height: hp(20),
+    flexDirection: 'row',
+    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignSelf: 'center',
   },
 });
 

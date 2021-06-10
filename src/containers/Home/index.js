@@ -7,14 +7,19 @@ import {
 import { AppText, Screen } from '../../components/common';
 import DashboardHeader from '../../components/DashboardHeader';
 import DropDownItem from '../../components/DropDownItem';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { IMAGE_PICKER_SCREEN } from '../../constants/Screens';
-
+import { FETCH_APPROVED_TOPIC, FETCH_REJECTED_TOPIC, FETCH_ALL_TOPIC } from '../../redux/actionTypes'
 const Home = props => {
-  const { navigation } = props;
+  const { navigation, route } = props;
+  const id = route.params ? (route.params.id ? route.params.id : 4) : 4
+  console.log(id)
 
+  const dispatch = useDispatch()
 
-
+  // dispatch({ type: FETCH_REJECTED_TOPIC, payload: { id: id } })
+  // dispatch({ type: FETCH_APPROVED_TOPIC, payload: { id: id } })
+  // dispatch({ type: FETCH_ALL_TOPIC, payload: { id: id } })
 
   const { topicReducer } = useSelector(state => (
     {
@@ -25,7 +30,7 @@ const Home = props => {
 
 
 
-
+  Alert.alert(id.toString())
 
 
   return (
@@ -41,6 +46,7 @@ const Home = props => {
         {topicReducer.map(topic => {
           return (
             <DropDownItem
+              type={id}
               onApprove={() => navigation.navigate(IMAGE_PICKER_SCREEN, { id: topic.id })}
               name={topic.name}
               number={topic.number}
