@@ -1,4 +1,4 @@
-import { HOME } from '../../constants/Screens';
+import { HOME, HOME_SCREEN } from '../../constants/Screens';
 // import { setItem } from 'helpers/Localstorage';
 import { Alert } from 'react-native';
 import { put, call, all, select } from 'redux-saga/effects';
@@ -19,6 +19,9 @@ import {
     SHOW_NETWORK_MODAL,
     SIGN_IN,
     SIGN_IN_FAILURE,
+    SUBMIT_IMAGES,
+    SUBMIT_IMAGES_FAILURE,
+    SUBMIT_IMAGES_SUCCESS,
 } from '../actionTypes';
 import { getItem, setItem } from '../../helpers/LocalStorage';
 import { startAction, stopAction } from '../actions';
@@ -30,6 +33,7 @@ export function* submitImageSaga({ payload }) {
     // console.log(data, "data")
     // const id = 2
     try {
+        yield put(startAction(SUBMIT_IMAGES))
         const data = { task_id: payload.id, images: payload.selectedImage, }
 
         //     let userProfile = yield getItem('@userProfile')
@@ -43,36 +47,50 @@ export function* submitImageSaga({ payload }) {
         let userProfile = yield getItem('@userProfile');
         userProfile = JSON.parse(userProfile);
         RestClient.setHeader('Authorization', `Bearer ${userProfile.token}`);
-        console.log("payload.selectedImage,", payload.selectedImage)
+        console.log("payload.selectedImage,", payload.selectedImage[0].uri)
         const form_data = new FormData();
-        form_data.append('images', payload.selectedImage[0]);
-        form_data.append('task_id', payload.id);
-        console.log(form_data, "form_data")
+        // form_data.append(`images[]`, [payload.selectedImage])
+        for (let key in payload.selectedImage) {
+            console.log(payload.selectedImage[key])
+            form_data.append(`images[${key}]`,
+                {
+                    name: payload.selectedImage[key].fileName,
+                    uri: payload.selectedImage[key].uri,
+                    type: payload.selectedImage[key].type
+                });
+        }
+        // form_data.append('images[]', payload.selectedImage);
+        form_data.append('task_id', '2');
+        // console.log("SD", form_data.getAll('images[]'))
+        console.log(JSON.parse(JSON.stringify(form_data)), "form_data")
         // form_data.append('author_name', payload.author_name);
         const response = yield call(() =>
 
             RestClient.post(API_ENDPOINTS.image, form_data),
         );
-        console.log(response, "response")
+        // console.log(response, "response")
         //     // if (response.problem === NETWORK_ERROR) {
         //     //     return yield put({ type: SHOW_NETWORK_MODAL });
         //     // }
-        //     const {
-        //         data: { data: res, message, success },
-        //     } = response;
-        //     // // console.log('user', response);
-        //     if (response.status == 200) {
-        //         yield put({ type: FETCH_PERFORMED_TOPIC_SUCCESS, payload: response.data.data });
-        //     } else {
-        //         const text =
-        //             "Something went Wrong Fetching the data";
-        //         Alert.alert(text);
+        // const {
+        //     data: { data: res, message, success },
+        // } = response;
+        console.log('user', response);
+        if (response.data.status) {
+            yield put({ type: SUBMIT_IMAGES_SUCCESS, payload: null });
+            // Alert.alert("Submit")
+            // NavigationService.navigate(HOME_SCREEN)
+        } else {
+            const text =
+                "Something went Wrong uploading the photos";
+            Alert.alert(text);
 
-        //         yield put({ type: FETCH_PERFORMED_TOPIC_FAILURE, payload: null });
-        //     }
+            yield put({ type: SUBMIT_IMAGES_FAILURE, payload: null });
+        }
     } catch (error) {
+        yield put({ type: SUBMIT_IMAGES_FAILURE, error });
         // yield put({ type: SIGN_IN_FAILURE, error });
     } finally {
-        // yield put(stopAction(FETCH_PERFORMED_TOPIC));
+        yield put(stopAction(SUBMIT_IMAGES));
     }
 }

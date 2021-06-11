@@ -66,7 +66,7 @@ const Home = props => {
           return (
             <DropDownItem
               type={id}
-              onApprove={() => navigation.navigate(IMAGE_PICKER_SCREEN, { id: topic.id })}
+              onApprove={() => navigation.navigate(IMAGE_PICKER_SCREEN, { id: 33 })}
               // onApprove={() => Alert.alert(topic.id.toString())}
               name={topic.name}
               number={topic.number}
