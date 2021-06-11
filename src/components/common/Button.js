@@ -1,14 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, ActivityIndicator, TouchableOpacity, Image, I18nManager } from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import { Icon } from 'react-native-elements';
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  TouchableOpacity,
+  Image,
+  I18nManager,
+} from 'react-native';
+import {useTheme} from '@react-navigation/native';
+import {Icon} from 'react-native-elements';
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { AppText } from './AppText';
-const Button = (props) => {
+import {AppText} from './AppText';
+const Button = props => {
   const {
     children,
     color,
@@ -27,9 +34,8 @@ const Button = (props) => {
     outOfStock,
     add,
     inStock,
-
   } = props;
-  const { colors } = useTheme();
+  const {colors} = useTheme();
   return (
     <TouchableOpacity
       style={[
@@ -42,9 +48,9 @@ const Button = (props) => {
           backgroundColor: background || colors.primary,
           marginVertical: 3,
         },
-        borderRadius && { borderRadius: parseInt(borderRadius) },
-        primary && { backgroundColor: colors.primary },
-        secondary && { backgroundColor: colors.secondary },
+        borderRadius && {borderRadius: parseInt(borderRadius)},
+        primary && {backgroundColor: colors.primary},
+        secondary && {backgroundColor: colors.secondary},
         style,
       ]}
       onPress={onPress}>
@@ -61,29 +67,62 @@ const Button = (props) => {
         {children || 'Button'}
       </AppText>
       {/* please make single component for it */}
-      {outOfStock &&
-        <View style={{ position: "absolute", left: wp(13), width: 20, height: 25, zIndex: 1, top: hp(1.25) }}>
-          <Image style={{ width: "100%", height: "100%" }} source={require("../../assets/images/nocart2.png")} />
+      {outOfStock && (
+        <View
+          style={{
+            position: 'absolute',
+            left: wp(13),
+            width: 20,
+            height: 25,
+            zIndex: 1,
+            top: hp(1.25),
+          }}>
+          <Image
+            style={{width: '100%', height: '100%'}}
+            source={require('../../assets/images/nocart2.png')}
+          />
         </View>
-      }
-      {inStock &&
-        <View style={{ position: "absolute", left: wp(13), width: 20, aspectRatio: 1, zIndex: 1, top: hp(1.75) }}>
-          <Image style={{ width: "100%", height: "100%" }} source={require("../../assets/images/emptycart.png")} />
+      )}
+      {inStock && (
+        <View
+          style={{
+            position: 'absolute',
+            left: wp(13),
+            width: 20,
+            aspectRatio: 1,
+            zIndex: 1,
+            top: hp(1.75),
+          }}>
+          <Image
+            style={{width: '100%', height: '100%'}}
+            source={require('../../assets/images/emptycart.png')}
+          />
         </View>
-      }
-      {add &&
-        <View style={{ position: "absolute", left: wp(8), width: wp(5), height: wp(5), zIndex: 1 }}>
-          <Image style={{ width: "100%", height: "100%" }} source={require("../../assets/images/adddark.png")} />
+      )}
+      {add && (
+        <View
+          style={{
+            position: 'absolute',
+            left: wp(8),
+            width: wp(5),
+            height: wp(5),
+            zIndex: 1,
+          }}>
+          <Image
+            style={{width: '100%', height: '100%'}}
+            source={require('../../assets/images/adddark.png')}
+          />
         </View>
-      }
-      {props.icon && <Icon
-        size={15}
-        containerStyle={styles.iconStyle}
-        color="black"
-        name={I18nManager.isRTL ? "leftcircleo" : "rightcircleo"}
-        type="antdesign"
-      />
-      }
+      )}
+      {props.icon && (
+        <Icon
+          size={15}
+          containerStyle={styles.iconStyle}
+          color="black"
+          name={I18nManager.isRTL ? 'leftcircleo' : 'rightcircleo'}
+          type="antdesign"
+        />
+      )}
       <ActivityIndicator
         animating={loading || false}
         size="small"
@@ -109,6 +148,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 20,
     justifyContent: 'center',
-  }
+  },
 });
-export { Button };
+export {Button};

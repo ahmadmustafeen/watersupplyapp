@@ -1,15 +1,15 @@
 /* eslint-disable prettier/prettier */
-import React, { forwardRef, useEffect, useState } from 'react';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import React, {forwardRef, useEffect, useState} from 'react';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import AuthNav from './AuthNav';
 import DrawerMenu from '../containers/DrawerMenu';
 import DashboardNav from './DashboardNav';
-import { HOME, FORM_SCREEN } from '../constants/Screens';
-import { navigationRef } from '../../NavigationService';
+import {HOME, FORM_SCREEN} from '../constants/Screens';
+import {navigationRef} from '../../NavigationService';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const Drawer = createDrawerNavigator();
@@ -21,7 +21,7 @@ const DrawerNav = () => {
       initialRouteName={HOME}
       drawerContent={props => <DrawerMenu {...props} />}
       statusBarAnimation="fade"
-      drawerStyle={{ backgroundColor: 'transparent', width: '90%' }}
+      drawerStyle={{backgroundColor: 'transparent', width: '90%'}}
       drawerType="front">
       <Drawer.Screen name="Main" component={DashboardNav} />
     </Drawer.Navigator>
@@ -41,19 +41,20 @@ const navigatorComponent = Auth => {
 };
 
 const Navigator = (props, ref) => {
-  const [loaded, setLoaded] = useState(false)
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loaded, setLoaded] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    Add().then(() => { setLoaded(true) })
-
-  }, [])
+    Add().then(() => {
+      setLoaded(true);
+    });
+  }, []);
 
   const Add = async () => {
     try {
       const valueString = await AsyncStorage.getItem('@userProfile');
-      setLoggedIn(!!JSON.parse(valueString).token)
-      console.log(loggedIn, "Value")
+      setLoggedIn(!!JSON.parse(valueString).token);
+      console.log(loggedIn, 'Value');
     } catch (error) {
       console.error(error);
     }

@@ -17,7 +17,9 @@ export function* approveTaskSaga({type, payload}) {
   try {
     yield put(startAction(APPROVE_TASK));
     console.log('APPROVED TASK SAGA', payload);
-    const response = yield call(() => RestClient.post(API_ENDPOINTS.approval));
+    const response = yield call(() =>
+      RestClient.post(API_ENDPOINTS.approval, payload),
+    );
     console.log(response);
     const {status, data, message} = response;
     // const {

@@ -96,6 +96,7 @@ const Home = props => {
                   }
                   // onApprove={() => Alert.alert(topic.id.toString())}
                   name={topic.name}
+                  num={topic.id}
                   number={topic.number}
                   address={topic.address}
                   city={topic.city}
@@ -103,13 +104,26 @@ const Home = props => {
               );
             })
           : // console.log(Performedtopic)
-            Performedtopic.map(topic => {
+            Performedtopic.map((topic, key) => {
+              console.log(topic);
               return (
                 <DropDownItem
                   type={id}
                   onApprove={() =>
-                    navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
+                    // navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
+                    dispatch({
+                      type: APPROVE_TASK,
+                      payload: {id: topic.id, status: 'Done'},
+                    })
                   }
+                  onReject={() =>
+                    // navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
+                    dispatch({
+                      type: APPROVE_TASK,
+                      payload: {id: topic.id, status: 'Rejected'},
+                    })
+                  }
+                  num={key}
                   name={topic.name}
                   number={topic.number}
                   address={topic.address}
@@ -118,16 +132,6 @@ const Home = props => {
                 />
               );
             })}
-
-        {/* name number city address */}
-        {/* <DropDownItem
-          title="First"
-          description="Here is the info about first"
-        />
-        <DropDownItem
-          title="Second"
-          description="Here is the info about second"
-        />*/}
       </View>
     </Screen>
   );

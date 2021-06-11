@@ -8,6 +8,7 @@ import {AppText} from './common';
 
 const DropDownItem = props => {
   const {
+    num,
     name,
     number,
     address,
@@ -30,18 +31,25 @@ const DropDownItem = props => {
           },
         ]}
         onPress={() => setvisible(!visible)}>
-        <Text>{name}</Text>
+        <View style={styles.headContainer}>
+          <View style={{width: wp(10)}}>
+            <Text style={{fontWeight: 'bold', color: '#303b51'}}>#{num}</Text>
+          </View>
+          <View style={{width: wp(90)}}>
+            <Text style={{color: '#303b51'}}>{name}</Text>
+          </View>
+        </View>
       </TouchableOpacity>
       <View style={[styles.dropdownBox, visible && {display: 'flex'}]}>
-        <Text>{number}</Text>
-        <Text>{address}</Text>
-        <Text>{city}</Text>
+        <Text>Phone #: {number}</Text>
+        <Text>Location: {address}</Text>
+        <Text>City: {city}</Text>
         <View style={styles.buttonContainer}>
           {(type == 4 ||
             done_rejected === 'Rejected' ||
             done_rejected === null) && (
             <TouchableOpacity
-              style={[styles.submitBtn, {backgroundColor: 'rgb(255,50,50)'}]}
+              style={[styles.submitBtnReject]}
               onPress={type != 4 || done_rejected !== null ? onReject : null}>
               <AppText size="14">
                 {type == 4 || done_rejected === null ? 'Reject' : 'Rejected'}
@@ -52,7 +60,7 @@ const DropDownItem = props => {
             done_rejected === 'Done' ||
             done_rejected === null) && (
             <TouchableOpacity
-              style={[styles.submitBtn, {backgroundColor: 'rgb(10,200,100)'}]}
+              style={[styles.submitBtnApprove]}
               onPress={type != 4 || done_rejected !== null ? onApprove : null}>
               <AppText size="14">
                 {type == 4 || done_rejected === null ? 'Approve' : 'Approved'}
@@ -69,11 +77,10 @@ const styles = StyleSheet.create({
   dropdownContainer: {
     width: wp(90),
     alignSelf: 'center',
-    backgroundColor: '#51d1c2',
+    backgroundColor: 'white',
     justifyContent: 'center',
     paddingHorizontal: wp(10),
-    borderRadius: 20,
-    // bordertRadius: 20,
+    borderRadius: 5,
     height: hp(10),
     marginTop: hp(1),
   },
@@ -81,19 +88,37 @@ const styles = StyleSheet.create({
     display: 'none',
     width: wp(90),
     alignSelf: 'center',
-    backgroundColor: 'rgba(255,255,255,1)',
+    backgroundColor: '#e6eafb',
     // height: 100,
     padding: 20,
     borderBottomLeftRadius: 20,
+
     borderBottomRightRadius: 20,
   },
-  submitBtn: {
+  headContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  submitBtnReject: {
     margin: 5,
     width: wp(25),
     height: hp(7),
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'red',
+  },
+  submitBtnApprove: {
+    margin: 5,
+    width: wp(25),
+    height: hp(7),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'green',
   },
   buttonContainer: {
     flexDirection: 'row',
