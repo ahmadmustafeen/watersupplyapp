@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { AppText } from './common';
+import {AppText} from './common';
 
 const DropDownItem = props => {
-  const { name, number, address, city, onApprove, type, done_rejected } = props;
+  const {
+    name,
+    number,
+    address,
+    city,
+    onApprove,
+    type,
+    done_rejected,
+    onReject,
+  } = props;
   // console.log(type)
   const [visible, setvisible] = useState(false);
   return (
@@ -23,24 +32,36 @@ const DropDownItem = props => {
         onPress={() => setvisible(!visible)}>
         <Text>{name}</Text>
       </TouchableOpacity>
-      <View style={[styles.dropdownBox, visible && { display: 'flex' }]}>
+      <View style={[styles.dropdownBox, visible && {display: 'flex'}]}>
         <Text>{number}</Text>
         <Text>{address}</Text>
         <Text>{city}</Text>
         <View style={styles.buttonContainer}>
-
-          {(type == 4 || ((done_rejected === 'Rejected' || done_rejected === null))) && <TouchableOpacity
-            style={[styles.submitBtn, { backgroundColor: 'rgb(255,50,50)' }]}>
-            <AppText size="14">{(type == 4 || done_rejected === null) ? "Reject" : "Rejected"}</AppText>
-          </TouchableOpacity>}
-          {(type == 4 || ((done_rejected === 'Done' || done_rejected === null))) && <TouchableOpacity
-            style={[styles.submitBtn, { backgroundColor: 'rgb(10,200,100)' }]}
-            onPress={(type != 4 || done_rejected !== null) ? onApprove : null}>
-            <AppText size="14">{(type == 4 || done_rejected === null) ? "Approve" : "Approved"}</AppText>
-          </TouchableOpacity>}
+          {(type == 4 ||
+            done_rejected === 'Rejected' ||
+            done_rejected === null) && (
+            <TouchableOpacity
+              style={[styles.submitBtn, {backgroundColor: 'rgb(255,50,50)'}]}
+              onPress={type != 4 || done_rejected !== null ? onReject : null}>
+              <AppText size="14">
+                {type == 4 || done_rejected === null ? 'Reject' : 'Rejected'}
+              </AppText>
+            </TouchableOpacity>
+          )}
+          {(type == 4 ||
+            done_rejected === 'Done' ||
+            done_rejected === null) && (
+            <TouchableOpacity
+              style={[styles.submitBtn, {backgroundColor: 'rgb(10,200,100)'}]}
+              onPress={type != 4 || done_rejected !== null ? onApprove : null}>
+              <AppText size="14">
+                {type == 4 || done_rejected === null ? 'Approve' : 'Approved'}
+              </AppText>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
-    </View >
+    </View>
   );
 };
 
