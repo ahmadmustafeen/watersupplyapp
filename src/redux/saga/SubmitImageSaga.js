@@ -46,7 +46,7 @@ export function* submitImageSaga({ payload }) {
         //     yield put(startAction(FETCH_PERFORMED_TOPIC));
         let userProfile = yield getItem('@userProfile');
         userProfile = JSON.parse(userProfile);
-        RestClient.setHeader('Authorization', `Bearer ${userProfile.token}`);
+        RestClient.setHeader('Authorization', `Bearer ${userProfile.token}`,);
         console.log("payload.selectedImage,", payload.selectedImage[0].uri)
         const form_data = new FormData();
         // form_data.append(`images[]`, [payload.selectedImage])
@@ -54,13 +54,14 @@ export function* submitImageSaga({ payload }) {
             console.log(payload.selectedImage[key])
             form_data.append(`images[${key}]`,
                 {
-                    name: payload.selectedImage[key].fileName,
-                    uri: payload.selectedImage[key].uri,
-                    type: payload.selectedImage[key].type
+                    name: payload.selectedImage[key].modificationDate + key,
+                    uri: payload.selectedImage[key].path,
+                    // uri: false ? 'file:///data/user/0/com.foodpandaapp/cache/react-native-image-crop-picker/IMG_20210614_112447001.jpg' : payload.selectedImage[key].uri,
+                    type: payload.selectedImage[key].mime
                 });
         }
         // form_data.append('images[]', payload.selectedImage);
-        form_data.append('task_id', '2');
+        form_data.append('task_id', payload.id);
         // console.log("SD", form_data.getAll('images[]'))
         console.log(JSON.parse(JSON.stringify(form_data)), "form_data")
         // form_data.append('author_name', payload.author_name);
@@ -76,7 +77,7 @@ export function* submitImageSaga({ payload }) {
         //     data: { data: res, message, success },
         // } = response;
         console.log('user', response);
-        if (response.data.status) {
+        if (!!response.data.status) {
             yield put({ type: SUBMIT_IMAGES_SUCCESS, payload: null });
             // Alert.alert("Submit")
             // NavigationService.navigate(HOME_SCREEN)

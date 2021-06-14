@@ -3,8 +3,8 @@ import { View, StyleSheet, Image, TouchableOpacity, Text, ScrollView, Alert } fr
 import { AppText, Screen } from '../../components/common'
 import DashboardHeader from '../../components/DashboardHeader'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import ImagePicker from 'react-native-image-picker';
-import ImageCropPicker from 'react-native-image-crop-picker';
+// import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { FORM_SCREEN } from '../../constants/Screens';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -24,60 +24,93 @@ const ImagePickerScreen = props => {
     console.log(state, "THIS IS STATE")
 
 
-    const options = {
-        title: 'Select Avatar',
-        // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+    // const options = {
+    //     title: 'Select Avatar',
+    //     // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+    //     storageOptions: {
+    //         skipBackup: true,
+    //         path: 'images/foodPandaApp',
+    //     },
+    // };
+
+    var options = {
+        title: 'Select Image',
+        customButtons: [
+            {
+                name: 'customOptionKey',
+                title: 'Choose Photo from Custom Option'
+            },
+        ],
         storageOptions: {
             skipBackup: true,
-            path: 'images/foodPandaApp',
+            path: 'images',
         },
     };
+
     const selectFromGallery = props => {
-        launchImageLibrary(
-            options, (response) => {
-                console.log('Response = ', response);
-                if (response.didCancel) {
-                    console.log('User cancelled image picker');
-                } else if (response.error) {
-                    console.log('ImagePicker Error: ', response.error);
-                } else if (response.customButton) {
-                    console.log('User tapped custom button: ', response.customButton);
-                } else {
-                    setState({
-                        ...state, selectedImage: [...state.selectedImage, { ...response }]
-                    })
-                }
-            }
-        )
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: false,
+            multiple: true
+        }).then(image => {
+            setState({
+                ...state, selectedImage: [...state.selectedImage, ...image]
+            })
+        });
+        // launchImageLibrary(
+        //     options, (response) => {
+        //         console.log('Response = ', response);
+        //         if (response.didCancel) {
+        //             console.log('User cancelled image picker');
+        //         } else if (response.error) {
+        //             console.log('ImagePicker Error: ', response.error);
+        //         } else if (response.customButton) {
+        //             console.log('User tapped custom button: ', response.customButton);
+        //         } else {
+        //             setState({
+        //                 ...state, selectedImage: [...state.selectedImage, { ...response }]
+        //             })
+        //         }
+        //     }
+        // )
     }
     const setImage = () => {
+        ImagePicker.openCamera({
+            width: 300,
+            height: 400,
+            // cropping: true,
+        }).then(image => {
+            setState({
+                ...state, selectedImage: [...state.selectedImage, { ...image }]
+            })
+        })
 
-        launchCamera(
-            options, (response) => {
-                skipBackup: false;
-                console.log('Response = ', response);
-                if (response.didCancel) {
-                    console.log('User cancelled image picker');
-                } else if (response.error) {
-                    console.log('ImagePicker Error: ', response.error);
-                } else if (response.customButton) {
-                    console.log('User tapped custom button: ', response.customButton);
-                } else {
-                    setState({
-                        ...state, selectedImage: [...state.selectedImage, { ...response }]
-                        // ...state, selectedImage: [{ ...response }]
+        // launchCamera(
+        //     options, (response) => {
+        //         console.log('Response = ', response);
+        //         if (response.didCancel) {
+        //             console.log('User cancelled image picker');
+        //         } else if (response.error) {
+        //             console.log('ImagePicker Error: ', response.error);
+        //         } else if (response.customButton) {
+        //             console.log('User tapped custom button: ', response.customButton);
+        //         } else {
+        //             setState({
+        //                 ...state, selectedImage: [...state.selectedImage, { ...response }]
+        //                 // ...state, selectedImage: [{ ...response }]
 
-                    })
-                    // setState({
-                    //     ...state, selectedImage: [...state.selectedImage, {
-                    //         uri: Platform.OS == 'ios' ? response.uri.replace("file://", "/private") : response.uri,
-                    //         type: response.type,
-                    //         name: Platform.OS == 'ios' ? "placeholder_text" : response.fileName,
-                    //     }]
-                    // })
-                }
-            }
-        )
+        //             })
+        //             // setState({
+        //             //     ...state, selectedImage: [...state.selectedImage, {
+        //             //         uri: Platform.OS == 'ios' ? response.uri.replace("file://", "/private") : response.uri,
+        //             //         type: response.type,
+        //             //         name: Platform.OS == 'ios' ? "placeholder_text" : response.fileName,
+        //             //     }]
+        //             // })
+        //         }
+        //     }
+        // )
 
     };
     // const setImage = () => {
@@ -144,7 +177,7 @@ const ImagePickerScreen = props => {
                         {state.selectedImage.map(image => {
                             return (
                                 <TouchableOpacity onLongPress={() => deleteOldPhoto(image.uri)}>
-                                    <Image source={{ uri: image.uri }} style={{ width: 90, height: 100, margin: hp(1) }} />
+                                    <Image source={{ uri: image.path }} style={{ width: 90, height: 100, margin: hp(1) }} />
                                 </TouchableOpacity>
                             )
                         })}
