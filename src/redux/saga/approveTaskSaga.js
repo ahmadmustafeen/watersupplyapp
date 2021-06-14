@@ -13,11 +13,15 @@ import { RestClient } from '../../network/RestClient';
 import { Alert } from 'react-native';
 import { IMAGE_PICKER_SCREEN } from '../../constants/Screens';
 import { startAction, stopAction } from '../actions';
-import { setItem } from '../../helpers/LocalStorage';
+import { getItem, setItem } from '../../helpers/LocalStorage';
 export function* approveTaskSaga({ type, payload }) {
   try {
     yield put(startAction(APPROVE_TASK));
     console.log('APPROVED TASK SAGA', payload);
+
+    let userProfile = yield getItem('@userProfile');
+    userProfile = JSON.parse(userProfile);
+    RestClient.setHeader('Authorization', `Bearer ${userProfile.token}`,);
     const response = yield call(() =>
       RestClient.post(API_ENDPOINTS.approval, payload),
     );

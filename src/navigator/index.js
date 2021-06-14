@@ -53,10 +53,7 @@ const Navigator = (props, ref) => {
   const Add = async () => {
     try {
       const valueString = await AsyncStorage.getItem('@userProfile');
-      const approveItem = await AsyncStorage.getItem('@approveItem');
-      console.log(approveItem, "approveItem")
       setLoggedIn(!!JSON.parse(valueString).token);
-      console.log(loggedIn, 'Value');
     } catch (error) {
       console.error(error);
     }
