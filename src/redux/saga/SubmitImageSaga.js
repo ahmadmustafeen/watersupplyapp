@@ -1,4 +1,4 @@
-import { HOME, HOME_SCREEN } from '../../constants/Screens';
+import { FORM_SCREEN, HOME, HOME_SCREEN } from '../../constants/Screens';
 // import { setItem } from 'helpers/Localstorage';
 import { Alert } from 'react-native';
 import { put, call, all, select } from 'redux-saga/effects';
@@ -79,6 +79,22 @@ export function* submitImageSaga({ payload }) {
         console.log('user', response);
         if (!!response.data.status) {
             yield put({ type: SUBMIT_IMAGES_SUCCESS, payload: null });
+            Alert.alert('Images uploaded Successfully', 'Press continue to add photos', [
+                // {
+                //     text: 'Cancel',
+                //     onPress: () => true,
+                //     style: 'cancel',
+                // },
+                {
+                    text: 'Continue',
+                    onPress: () => {
+                        // setState({ ...state, selectedImage: state.selectedImage.filter(image => image.uri != id) })
+                        NavigationService.navigate(FORM_SCREEN);
+                    },
+                },
+            ]);
+
+
             // Alert.alert("Submit")
             // NavigationService.navigate(HOME_SCREEN)
         } else {

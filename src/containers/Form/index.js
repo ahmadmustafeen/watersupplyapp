@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Alert,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  BackHandler
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -13,6 +14,7 @@ import {
 } from 'react-native-responsive-screen';
 import { Screen, AppText, RadioButton } from '../../components/common';
 import DashboardHeader from '../../components/DashboardHeader';
+import { HOME_SCREEN } from '../../constants/Screens';
 
 const Form = props => {
   const [state, setState] = useState({
@@ -29,6 +31,27 @@ const Form = props => {
     setState({ ...state, [key]: val });
   };
 
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Form is not submitted", "Are you sure you want to go back?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => props.navigation.navigate(HOME_SCREEN) }
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+    return () => backHandler.remove();
+  }, []);
+
+
   const submitHandler = () => {
     Alert.alert('Submitted');
     setState({
@@ -41,6 +64,10 @@ const Form = props => {
       product_type: new Set(),
     });
   };
+
+
+
+
 
   return (
     <Screen>

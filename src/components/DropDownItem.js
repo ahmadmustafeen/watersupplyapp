@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {AppText} from './common';
+import { AppText } from './common';
 
 const DropDownItem = props => {
   const {
@@ -32,15 +32,15 @@ const DropDownItem = props => {
         ]}
         onPress={() => setvisible(!visible)}>
         <View style={styles.headContainer}>
-          <View style={{width: wp(10)}}>
-            <Text style={{fontWeight: 'bold', color: '#303b51'}}>#{num}</Text>
+          <View style={{ width: wp(15) }}>
+            <Text style={{ fontWeight: 'bold', color: '#303b51' }}>#{num}</Text>
           </View>
-          <View style={{width: wp(90)}}>
-            <Text style={{color: '#303b51'}}>{name}</Text>
+          <View style={{ width: wp(60) }}>
+            <Text style={{ color: '#303b51' }}>{name}</Text>
           </View>
         </View>
       </TouchableOpacity>
-      <View style={[styles.dropdownBox, visible && {display: 'flex'}]}>
+      <View style={[styles.dropdownBox, visible && { display: 'flex' }]}>
         <Text>Phone #: {number}</Text>
         <Text>Location: {address}</Text>
         <Text>City: {city}</Text>
@@ -48,25 +48,25 @@ const DropDownItem = props => {
           {(type == 4 ||
             done_rejected === 'Rejected' ||
             done_rejected === null) && (
-            <TouchableOpacity
-              style={[styles.submitBtnReject]}
-              onPress={type != 4 || done_rejected !== null ? onReject : null}>
-              <AppText size="14">
-                {type == 4 || done_rejected === null ? 'Reject' : 'Rejected'}
-              </AppText>
-            </TouchableOpacity>
-          )}
+              <TouchableOpacity
+                style={[styles.submitBtnReject]}
+                onPress={type != 4 || done_rejected !== null ? onReject : null}>
+                <AppText size="14">
+                  {type == 4 || done_rejected === null ? 'Reject' : 'Rejected'}
+                </AppText>
+              </TouchableOpacity>
+            )}
           {(type == 4 ||
             done_rejected === 'Done' ||
             done_rejected === null) && (
-            <TouchableOpacity
-              style={[styles.submitBtnApprove]}
-              onPress={type != 4 || done_rejected !== null ? onApprove : null}>
-              <AppText size="14">
-                {type == 4 || done_rejected === null ? 'Approve' : 'Approved'}
-              </AppText>
-            </TouchableOpacity>
-          )}
+              <TouchableOpacity
+                style={[styles.submitBtnApprove]}
+                onPress={type != 4 || done_rejected !== null ? onApprove : null}>
+                <AppText size="14">
+                  {type == 4 || done_rejected === null ? 'Approve' : 'Approved'}
+                </AppText>
+              </TouchableOpacity>
+            )}
         </View>
       </View>
     </View>

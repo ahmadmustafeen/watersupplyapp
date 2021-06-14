@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {RefreshControl} from 'react-native';
-import {StyleSheet, View} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import React, { useState } from 'react';
+import { RefreshControl } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -9,15 +9,18 @@ import {
 } from 'react-native-responsive-screen';
 
 const Screen = props => {
-  const {noPadding, contentPadding} = props;
+  const { noPadding, contentPadding } = props;
 
   const getComponent = key => {
-    const {children} = props;
+    const { children } = props;
     return children.filter(view => view.key === key);
   };
 
   return (
-    <>
+    <View style={{
+      backgroundColor: '#e8ecf8',
+
+    }}>
       {getComponent('header').length ? (
         <View style={styles.header}>{getComponent('header')}</View>
       ) : null}
@@ -26,7 +29,7 @@ const Screen = props => {
           props.refresh && (
             <RefreshControl
               refreshing={false}
-              // onRefresh={onRefresh}
+            // onRefresh={onRefresh}
             />
           )
         }
@@ -49,14 +52,14 @@ const Screen = props => {
         <View
           style={[
             styles.formContainer,
-            {backgroundColor: props.backgroundColor},
-            noPadding && {paddingHorizontal: 0, paddingBottom: 0},
+            { backgroundColor: props.backgroundColor },
+            noPadding && { paddingHorizontal: 0, paddingBottom: 0 },
           ]}>
           {getComponent('content').length ? (
             <View
               style={[
                 styles.content,
-                contentPadding && {paddingHorizontal: 20},
+                contentPadding && { paddingHorizontal: 20 },
               ]}>
               {getComponent('content')}
             </View>
@@ -67,7 +70,7 @@ const Screen = props => {
         <View style={styles.footer}>{getComponent('footer')}</View>
       ) : null}
       {/* </ScrollView> */}
-    </>
+    </View>
   );
 };
 
@@ -77,6 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingHorizontal: 25,
     // flexGrow: 1
+    // backgroundColor: 'red'
     // paddingBottom: 20,
   },
   container: {
@@ -87,18 +91,18 @@ const styles = StyleSheet.create({
   },
   header: {
     // marginBottom: hp(4),
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
   content: {
     flex: 1,
-    backgroundColor: '#e8ecf8',
+    // backgroundColor: '#e8ecf8',
     // flexGrow: 1
   },
   footer: {
-    marginTop: 0,
-    backgroundColor: '#e8ecf8',
-    paddingVertical: heightPercentageToDP(3),
+    // marginTop: 0,
+    // backgroundColor: '#e8ecf8',
+    // paddingVertical: heightPercentageToDP(3),
   },
 });
 
-export {Screen};
+export { Screen };

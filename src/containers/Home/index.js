@@ -28,10 +28,13 @@ const Home = props => {
     if (id != 4) {
       dispatch({ type: FETCH_PERFORMED_TOPIC, payload: { id: id } });
     } else {
-      dispatch({
-        type: SIGN_IN,
-        payload: { user_id: userProfileReducer?.username },
-      });
+      if (!route.params) {
+        dispatch({
+          type: SIGN_IN,
+          payload: { user_id: userProfileReducer?.username },
+        });
+      }
+
     }
   }, [id]);
   // dispatch({ type: FETCH_APPROVED_TOPIC, payload: { id: id } })
@@ -58,7 +61,7 @@ const Home = props => {
   // Alert.alert(id.toString())
 
   return (
-    <Screen noPadding>
+    <Screen >
       <View key="header">
         <DashboardHeader
           title={

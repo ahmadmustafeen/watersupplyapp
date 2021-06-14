@@ -39,7 +39,9 @@ const DrawerMenu = (props) => {
       </View>
       <View style={styles.row} />
       <View style={styles.drawerItemContainer}>
-        <DrawerItem title="Home" />
+        <DrawerItem title="Home" onPress={() => {
+          props.navigation.navigate(HOME_SCREEN, { id: 4 })
+        }} />
       </View>
       <View style={styles.row} />
       <View style={styles.drawerItemContainer}>
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
   drawerItemContainer: {
     width: wp(75),
     paddingHorizontal: wp(5),
-    height: hp(8),
+    height: hp(10),
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',

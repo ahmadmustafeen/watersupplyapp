@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import {Icon} from 'react-native-elements';
-import {AppText} from './common';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
+import { AppText } from './common';
 
 const DrawerItem = props => {
-  const {title, iconSize, iconType, iconName, onPress} = props;
+  const { title, iconSize, iconType, iconName, onPress } = props;
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <AppText size={16}>{title}</AppText>
@@ -22,6 +23,7 @@ const DrawerItem = props => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingVertical: heightPercentageToDP(5),
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',

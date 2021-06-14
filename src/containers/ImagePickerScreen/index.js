@@ -161,7 +161,7 @@ const ImagePickerScreen = props => {
     }
   ), shallowEqual);
   return (
-    <Screen noPadding>
+    <Screen >
       <View key="header">
         <DashboardHeader
           title="Select Image"
@@ -208,6 +208,9 @@ const ImagePickerScreen = props => {
             })}
           </View>
         </ScrollView>
+
+      </View>
+      <View key="footer" style={{ paddingBottom: hp(2) }}>
         <View style={styles.btnContainer}>
           <TouchableOpacity
             onPress={() => selectFromGallery()}
@@ -232,7 +235,7 @@ const ImagePickerScreen = props => {
               backgroundColor: 'white',
             },
           ]}
-          onPress={() => dispatch({ type: SUBMIT_IMAGES, payload: { ...state } })}>
+          onPress={() => state.selectedImage.length ? dispatch({ type: SUBMIT_IMAGES, payload: { ...state } }) : Alert.alert("Select Atleast one photo")}>
           <AppText color="black" size="18">
             Submit
           </AppText>
@@ -244,7 +247,7 @@ const ImagePickerScreen = props => {
 
 const styles = StyleSheet.create({
   container: {
-    height: hp(80),
+    height: hp(68),
   },
   btnContainer: {
     borderWidth: 0,

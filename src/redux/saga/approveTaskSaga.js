@@ -1,4 +1,4 @@
-import {put, call} from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 import {
   FETCH_ORDER_SUCCESS,
   FETCH_ORDER_FAILURE,
@@ -8,12 +8,12 @@ import {
 } from '../actionTypes';
 import * as NavigationService from '../../../NavigationService';
 
-import {API_ENDPOINTS} from '../../constants/Network';
-import {RestClient} from '../../network/RestClient';
-import {Alert} from 'react-native';
-import {IMAGE_PICKER_SCREEN} from '../../constants/Screens';
-import {startAction, stopAction} from '../actions';
-export function* approveTaskSaga({type, payload}) {
+import { API_ENDPOINTS } from '../../constants/Network';
+import { RestClient } from '../../network/RestClient';
+import { Alert } from 'react-native';
+import { IMAGE_PICKER_SCREEN } from '../../constants/Screens';
+import { startAction, stopAction } from '../actions';
+export function* approveTaskSaga({ type, payload }) {
   try {
     yield put(startAction(APPROVE_TASK));
     console.log('APPROVED TASK SAGA', payload);
@@ -21,16 +21,16 @@ export function* approveTaskSaga({type, payload}) {
       RestClient.post(API_ENDPOINTS.approval, payload),
     );
     console.log(response);
-    const {status, data, message} = response;
+    const { status, data, message } = response;
     // const {
     //   data: {data},
     //   status,
     // } = response;
     console.log('FETCH_ORDER_SAGA', response);
     if (!response.data.status) {
-      yield put({type: APPROVE_TASK_FAILURE, payload: data});
+      yield put({ type: APPROVE_TASK_FAILURE, payload: data });
     } else {
-      yield put({type: APPROVE_TASK_SUCCESS, payload: data});
+      yield put({ type: APPROVE_TASK_SUCCESS, payload: data });
       Alert.alert('Your task Approved', 'Press continue to add photos', [
         {
           text: 'Cancel',
