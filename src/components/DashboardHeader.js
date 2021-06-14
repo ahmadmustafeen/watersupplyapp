@@ -1,16 +1,16 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Icon } from 'react-native-elements';
+import {View, StyleSheet} from 'react-native';
+import {Icon} from 'react-native-elements';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { openDrawer } from '@react-navigation-drawer/lib/typescript/src/routers/DrawerActions';
-import { AppText } from './common';
+import {openDrawer} from '@react-navigation-drawer/lib/typescript/src/routers/DrawerActions';
+import {AppText} from './common';
 
 const DashboardHeader = props => {
-  console.log()
-  const { title, subTitle } = props;
+  console.log();
+  const {title, subTitle} = props;
   return (
     <View style={styles.container}>
       <View style={styles.drawerIcon}>
@@ -22,7 +22,9 @@ const DashboardHeader = props => {
         />
       </View>
       <View style={styles.innerContainer}>
-        <AppText size="18" bold capitalize style={{ paddingRight: 10 }}>{title}</AppText>
+        <AppText size="18" bold capitalize style={{paddingRight: 10}}>
+          {title}
+        </AppText>
         <AppText size="14">{subTitle}</AppText>
       </View>
     </View>
@@ -33,13 +35,13 @@ const styles = StyleSheet.create({
     width: wp(100),
     height: hp(10),
     flexDirection: 'row',
-    backgroundColor: '#51c4d3',
+    // backgroundColor: 'white',
   },
   drawerIcon: {
     // width: wp(30),
     paddingLeft: wp(8),
     paddingRight: wp(2),
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   innerContainer: {
     width: wp(70),
