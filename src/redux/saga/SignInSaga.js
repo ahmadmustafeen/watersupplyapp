@@ -12,6 +12,7 @@ import { RestClient } from '../../network/RestClient';
 // } from '../actionTypes';
 import * as NavigationService from '../../../NavigationService';
 import {
+    APPROVE_TASK,
     FETCH_TOPIC_SUCCESS,
     SHOW_NETWORK_MODAL,
     SIGN_IN,
@@ -21,6 +22,7 @@ import {
 import { getItem, setItem } from '../../helpers/LocalStorage';
 import { startAction, stopAction } from '../actions';
 import { NETWORK_ERROR } from 'apisauce';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export function* signinSaga({ payload }) {
     try {
@@ -42,6 +44,17 @@ export function* signinSaga({ payload }) {
             yield put({ type: FETCH_TOPIC_SUCCESS, payload: response.data.data.task });
             // console.log("RES", res,)
             yield setItem('@userProfile', JSON.stringify({ token: res.token, user_id: res.username }));
+
+            let approveTaskData = yield getItem('@approveItem');
+            approveTaskData = JSON.parse(approveTaskData)
+            if (!!approveTaskData) {
+                yield put({ type: APPROVE_TASK, payload: { ...approveTaskData, noModel: true } })
+            }
+
+
+
+
+
 
             RestClient.setHeader('Authorization', `Bearer ${res.token}`);
             yield put({ type: SIGN_IN_SUCCESS, payload: res });

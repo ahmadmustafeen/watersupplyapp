@@ -69,6 +69,27 @@ export function* submitImageSaga({ payload }) {
 
             RestClient.post(API_ENDPOINTS.image, form_data),
         );
+
+
+        if (response.problem === "NETWORK_ERROR") {
+            yield setItem('@uploadImage', JSON.stringify(form_data));
+            // Alert.alert("Network Error", "Your action is stored locally and will be perform when connected to a network")
+            Alert.alert("Network Error", "Images are stored locally and will be uploaded when connected to a network", [
+                {
+                    text: 'Cancel',
+                    onPress: () => true,
+                    style: 'cancel',
+                },
+                {
+                    text: 'OK',
+                    onPress: () => {
+                        // setState({ ...state, selectedImage: state.selectedImage.filter(image => image.uri != id) })
+                        NavigationService.navigate(FORM_SCREEN);
+                    },
+                },
+            ]);
+        }
+
         // console.log(response, "response")
         //     // if (response.problem === NETWORK_ERROR) {
         //     //     return yield put({ type: SHOW_NETWORK_MODAL });

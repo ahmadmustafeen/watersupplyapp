@@ -13,6 +13,7 @@ import { RestClient } from '../../network/RestClient';
 import { Alert } from 'react-native';
 import { IMAGE_PICKER_SCREEN } from '../../constants/Screens';
 import { startAction, stopAction } from '../actions';
+import { setItem } from '../../helpers/LocalStorage';
 export function* approveTaskSaga({ type, payload }) {
   try {
     yield put(startAction(APPROVE_TASK));
@@ -20,6 +21,7 @@ export function* approveTaskSaga({ type, payload }) {
     const response = yield call(() =>
       RestClient.post(API_ENDPOINTS.approval, payload),
     );
+
     console.log(response);
     const { status, data, message } = response;
     // const {
@@ -27,7 +29,32 @@ export function* approveTaskSaga({ type, payload }) {
     //   status,
     // } = response;
     console.log('FETCH_ORDER_SAGA', response);
-    if (!response.data.status) {
+    if (payload.noModel === true) {
+      if (response.data.status) {
+        yield setItem('@approveItem', JSON.stringify(null));
+      }
+    }
+
+    else if (response.problem === "NETWORK_ERROR") {
+      yield setItem('@approveItem', JSON.stringify(payload));
+      // Alert.alert("Network Error", "Your action is stored locally and will be perform when connected to a network")
+      Alert.alert("Network Error", "Your action is stored locally and will be perform when connected to a network", [
+        {
+          text: 'Cancel',
+          onPress: () => true,
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            // setState({ ...state, selectedImage: state.selectedImage.filter(image => image.uri != id) })
+            NavigationService.navigate(IMAGE_PICKER_SCREEN);
+          },
+        },
+      ]);
+    }
+
+    else if (!response.data.status) {
       yield put({ type: APPROVE_TASK_FAILURE, payload: data });
     } else {
       yield put({ type: APPROVE_TASK_SUCCESS, payload: data });
