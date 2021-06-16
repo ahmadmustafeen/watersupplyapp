@@ -13,6 +13,7 @@ import { RestClient } from '../../network/RestClient';
 import * as NavigationService from '../../../NavigationService';
 import {
     APPROVE_TASK,
+    FETCH_TASK,
     FETCH_TOPIC_SUCCESS,
     SHOW_NETWORK_MODAL,
     SIGN_IN,
@@ -43,6 +44,7 @@ export function* signinSaga({ payload }) {
         // console.log('user', response);
         if (status) {
             yield put({ type: FETCH_TOPIC_SUCCESS, payload: response.data.data.task });
+            yield put({ type: FETCH_TASK, payload: null });
             // console.log("RES", res,)
             yield setItem('@userProfile', JSON.stringify({ token: res.token, user_id: res.username }));
 

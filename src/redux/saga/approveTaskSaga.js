@@ -5,6 +5,7 @@ import {
   APPROVE_TASK_FAILURE,
   APPROVE_TASK_SUCCESS,
   APPROVE_TASK,
+  FETCH_TASK,
 } from '../actionTypes';
 import * as NavigationService from '../../../NavigationService';
 
@@ -62,7 +63,12 @@ export function* approveTaskSaga({ type, payload }) {
       yield put({ type: APPROVE_TASK_FAILURE, payload: data });
     } else {
       yield put({ type: APPROVE_TASK_SUCCESS, payload: data });
-      Alert.alert('Your task Approved', 'Press continue to add photos', [
+      yield put({ type: FETCH_TASK, payload: null });
+
+
+
+
+      Alert.alert('Task is Approved', 'Press continue to add photos', [
         {
           text: 'Cancel',
           onPress: () => true,

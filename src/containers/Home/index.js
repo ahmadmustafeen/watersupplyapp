@@ -13,6 +13,7 @@ import {
   FETCH_PERFORMED_TOPIC,
   SIGN_IN,
   APPROVE_TASK,
+  FETCH_TASK,
 } from '../../redux/actionTypes';
 import { checkIfLoading } from '../../redux/selectors';
 import Loader from '../../components/Loader';
@@ -34,7 +35,9 @@ const Home = props => {
           payload: { user_id: userProfileReducer?.username },
         });
       }
-
+      dispatch({
+        type: FETCH_TASK, payload: null
+      })
     }
   }, [id]);
   // dispatch({ type: FETCH_APPROVED_TOPIC, payload: { id: id } })
@@ -51,6 +54,7 @@ const Home = props => {
           FETCH_PERFORMED_TOPIC,
           SIGN_IN,
           APPROVE_TASK,
+          FETCH_TASK
         ),
 
         getId: getId,
@@ -79,62 +83,59 @@ const Home = props => {
       <View key="content">
         <Loader loading={isLoading} />
         {id === 4
-          ? topicReducer.map(topic => {
-            return (
-              <DropDownItem
-                type={id}
-                onApprove={() =>
-                  // navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
-                  dispatch({
-                    type: APPROVE_TASK,
-                    payload: { id: topic.id, status: 'Done' },
-                  })
-                }
-                onReject={() =>
-                  // navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
-                  dispatch({
-                    type: APPROVE_TASK,
-                    payload: { id: topic.id, status: 'Rejected' },
-                  })
-                }
-                // onApprove={() => Alert.alert(topic.id.toString())}
-                name={topic.name}
-                num={topic.id}
-                number={topic.number}
-                address={topic.address}
-                city={topic.city}
-              />
-            );
-          })
+          ? topicReducer.map((topic, key) => (
+            <DropDownItem
+              type={id}
+              onApprove={() =>
+                // navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
+                dispatch({
+                  type: APPROVE_TASK,
+                  payload: { id: topic.id, status: 'Done' },
+                })
+              }
+              onReject={() =>
+                // navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
+                dispatch({
+                  type: APPROVE_TASK,
+                  payload: { id: topic.id, status: 'Rejected' },
+                })
+              }
+              // onApprove={() => Alert.alert(topic.id.toString())}
+              name={topic.name}
+              num={topic.id}
+              key={key}
+              number={topic.number}
+              address={topic.address}
+              city={topic.city}
+            />
+          ))
           : // console.log(Performedtopic)
-          Performedtopic.map((topic, key) => {
-            console.log(topic);
-            return (
-              <DropDownItem
-                type={id}
-                onApprove={() =>
-                  // navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
-                  dispatch({
-                    type: APPROVE_TASK,
-                    payload: { id: topic.id, status: 'Done' },
-                  })
-                }
-                onReject={() =>
-                  // navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
-                  dispatch({
-                    type: APPROVE_TASK,
-                    payload: { id: topic.id, status: 'Rejected' },
-                  })
-                }
-                num={key}
-                name={topic.name}
-                number={topic.number}
-                address={topic.address}
-                city={topic.city}
-                done_rejected={topic.done_rejected}
-              />
-            );
-          })}
+          Performedtopic.map((topic, key) => (
+            <DropDownItem
+              type={id}
+              key={key}
+              onApprove={() =>
+                // navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
+                dispatch({
+                  type: APPROVE_TASK,
+                  payload: { id: topic.id, status: 'Done' },
+                })
+              }
+              onReject={() =>
+                // navigation.navigate(IMAGE_PICKER_SCREEN, {id: topic.id})
+                dispatch({
+                  type: APPROVE_TASK,
+                  payload: { id: topic.id, status: 'Rejected' },
+                })
+              }
+              num={key}
+              name={topic.name}
+              number={topic.number}
+              address={topic.address}
+              city={topic.city}
+              done_rejected={topic.done_rejected}
+            />
+          ))}
       </View>
     </Screen>
   );

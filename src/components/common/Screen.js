@@ -19,6 +19,7 @@ const Screen = props => {
   return (
     <View style={{
       backgroundColor: '#e8ecf8',
+      height: hp(100)
 
     }}>
       {getComponent('header').length ? (
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     paddingHorizontal: 25,
-    // flexGrow: 1
+    flexGrow: 1
     // backgroundColor: 'red'
     // paddingBottom: 20,
   },
@@ -91,10 +92,11 @@ const styles = StyleSheet.create({
   },
   header: {
     // marginBottom: hp(4),
-    // backgroundColor: 'white',
+    backgroundColor: 'white',
   },
   content: {
     flex: 1,
+    // height: hp(85)
     // backgroundColor: '#e8ecf8',
     // flexGrow: 1
   },

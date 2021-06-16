@@ -21,7 +21,7 @@ const DropDownItem = props => {
   // console.log(type)
   const [visible, setvisible] = useState(false);
   return (
-    <View>
+    <View key={num}>
       <TouchableOpacity
         style={[
           styles.dropdownContainer,
@@ -50,7 +50,7 @@ const DropDownItem = props => {
             done_rejected === null) && (
               <TouchableOpacity
                 style={[styles.submitBtnReject]}
-                onPress={type != 4 || done_rejected !== null ? onReject : null}>
+                onPress={type == 4 || done_rejected === null ? onReject : null}>
                 <AppText size="14">
                   {type == 4 || done_rejected === null ? 'Reject' : 'Rejected'}
                 </AppText>
@@ -61,7 +61,7 @@ const DropDownItem = props => {
             done_rejected === null) && (
               <TouchableOpacity
                 style={[styles.submitBtnApprove]}
-                onPress={type != 4 || done_rejected !== null ? onApprove : null}>
+                onPress={type === 4 || done_rejected === null ? onApprove : null}>
                 <AppText size="14">
                   {type == 4 || done_rejected === null ? 'Approve' : 'Approved'}
                 </AppText>

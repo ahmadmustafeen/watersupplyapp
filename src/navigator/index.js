@@ -53,7 +53,7 @@ const Navigator = (props, ref) => {
   const Add = async () => {
     try {
       const valueString = await AsyncStorage.getItem('@userProfile');
-      setLoggedIn(!!JSON.parse(valueString).token);
+      setLoggedIn(!!JSON.parse(valueString)?.token);
     } catch (error) {
       console.error(error);
     }

@@ -15,6 +15,9 @@ import {
     FETCH_PERFORMED_TOPIC,
     FETCH_PERFORMED_TOPIC_FAILURE,
     FETCH_PERFORMED_TOPIC_SUCCESS,
+    FETCH_TASK,
+    FETCH_TASK_FAILURE,
+    FETCH_TASK_SUCCESS,
     FETCH_TOPIC_SUCCESS,
     SHOW_NETWORK_MODAL,
     SIGN_IN,
@@ -24,23 +27,24 @@ import { getItem, setItem } from '../../helpers/LocalStorage';
 import { startAction, stopAction } from '../actions';
 import { NETWORK_ERROR } from 'apisauce';
 
-export function* fetchPerformedTopicSaga({ payload }) {
-    const { id } = payload;
+export function* fetchTaskSaga({ payload }) {
+    // const { id } = payload;
     // const id = 2
     try {
-
+        // yield put({ type: FETCH_TASK_SUCCESS, payload: [] });
         let userProfile = yield getItem('@userProfile')
         userProfile = JSON.parse(userProfile)
         RestClient.setHeader('Authorization', `Bearer ${userProfile.token}`,);
-        const data = { num: id, user_id: userProfile.user_id }
+
+        const data = { user_id: userProfile.user_id }
         console.log(data, "data")
 
 
         // console.log(JSON.parse(userProfile), "@userProfile")
-        yield put(startAction(FETCH_PERFORMED_TOPIC));
+        yield put(startAction(FETCH_TASK));
 
         const response = yield call(() =>
-            RestClient.post(true ? API_ENDPOINTS.all_task : API_ENDPOINTS.approval, data),
+            RestClient.get(API_ENDPOINTS.all_task + "/" + userProfile.user_id),
         );
         console.log(response, "response")
         // if (response.problem === NETWORK_ERROR) {
@@ -49,19 +53,19 @@ export function* fetchPerformedTopicSaga({ payload }) {
         const {
             data: { data: res, message, success },
         } = response;
-        // // console.log('user', response);
+        // console.log('user', response);
         if (response.status == 200) {
-            yield put({ type: FETCH_PERFORMED_TOPIC_SUCCESS, payload: response.data.data });
+            yield put({ type: FETCH_TASK_SUCCESS, payload: response.data.data });
         } else {
             const text =
                 "Something went Wrong Fetching the data";
             Alert.alert(text);
 
-            yield put({ type: FETCH_PERFORMED_TOPIC_FAILURE, payload: null });
+            yield put({ type: FETCH_TASK_FAILURE, payload: null });
         }
     } catch (error) {
         // yield put({ type: SIGN_IN_FAILURE, error });
     } finally {
-        yield put(stopAction(FETCH_PERFORMED_TOPIC));
+        yield put(stopAction(FETCH_TASK));
     }
 }
