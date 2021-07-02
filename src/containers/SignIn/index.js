@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import { Screen, Button } from '../../components/common';
+import { Screen, Button, AppText } from '../../components/common';
 import Loader from '../../components/Loader';
 
 import {
@@ -13,6 +13,9 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { SIGN_IN } from '../../redux/actionTypes';
 import { checkIfLoading } from '../../redux/selectors';
 import { useState } from 'react';
+import InputWithIcon from '../../components/InputWithIcon';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SIGNUP_SCREEN } from '../../constants/Screens';
 
 const SignIn = props => {
   const [state, setState] = useState({
@@ -31,103 +34,88 @@ const SignIn = props => {
   // }));
 
   return (
-    <Screen >
+    <KeyboardAwareScrollView style={{ backgroundColor: '#1f1a30' }}>
       <View key="header"></View>
 
       <View key="content" style={styles.container}>
         <Loader loading={isLoading} />
-        <Text style={styles.text_login}>Log in</Text>
-        <View style={styles.textBox}>
-          <TextInput
-            style={styles.textBox_input}
-            placeholder="Your Username"
-            onChangeText={e => setState({ ...state, user_id: e })}
-            value={state.user_id}></TextInput>
-          {/* <TextInput
-            style={styles.textBox_input}
-            placeholder="Password"></TextInput> */}
+
+        <View style={styles.imgContainer}>
+          <Image source={require("../../assets/images/login-img.png")} style={{ width: '100%', height: "100%" }} />
         </View>
+
+        <View style={styles.inputContainer}>
+          <InputWithIcon placeholder="Email" />
+        </View>
+        <View style={styles.inputContainer}>
+          <InputWithIcon placeholder="Password" />
+        </View>
+
         <View style={{ alignSelf: 'center' }}>
           <Button
+            color="black"
             style={styles.butLogin}
             onPress={() => dispatch({ type: SIGN_IN, payload: state })}>
             <Text style={styles.butLoginText}> Login </Text>
           </Button>
+          <AppText color="#0df6e4" style={{ alignSelf: 'center' }}>Forgot you Password</AppText>
         </View>
 
         {/* <Loader loading={isLoading} /> */}
-      </View>
 
-      {/* <View key="footer" style={styles.footerLogin}>
-        <View style={styles.footerTextBox}>
-          <Text style={styles.footerText1}>Dont have an account?</Text>
-          <TouchableOpacity>
-            <Text style={styles.footerText2}>Sign up</Text>
-          </TouchableOpacity>
+
+        <View style={styles.footerLogin}>
+          <View style={styles.footerTextBox}>
+            <AppText color="white">or create a new account from</AppText>
+            <TouchableOpacity>
+              <AppText color="#0df6e4" onPress={() => props.navigation.navigate(SIGNUP_SCREEN)}> HERE</AppText>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View> */}
-    </Screen>
+      </View>
+    </KeyboardAwareScrollView >
   );
 };
 
 const styles = StyleSheet.create({
+  imgContainer: {
+    height: hp(30),
+    aspectRatio: 1.5,
+    marginVertical: hp(5),
+    alignSelf: 'center'
+  },
   container: {
-    // backgroundColor: '#f6f6f6',
     height: heightPercentageToDP(97.5),
     justifyContent: 'center'
-    // paddingTop: hp(10),
-  },
-  text_login: {
-    textAlign: 'center',
-    fontSize: 32,
-    fontWeight: 'bold',
-  },
-  textBox: {
-    paddingTop: hp(8),
-  },
-  textBox_input: {
-    borderStyle: 'solid',
-    borderRadius: 25,
-    marginVertical: hp(1),
-    paddingLeft: wp(5),
-    borderWidth: 1,
   },
   butLogin: {
-    height: hp(7),
+    height: hp(10),
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    width: wp(40),
-
+    width: wp(80),
+    backgroundColor: "#0df6e4",
+    color: 'black',
     borderRadius: 25,
     marginVertical: hp(2),
-    backgroundColor: 'black',
   },
   butLoginText: {
     textAlign: 'center',
-    color: 'white',
+    color: 'black',
     margin: 'auto',
     fontSize: 20,
   },
+  inputContainer: {
+    alignSelf: 'center',
+    width: wp(90),
+    height: hp(13)
+  },
   footerTextBox: {
-    marginTop: hp(5),
+    paddingTop: hp(2),
     flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  footerLogin: {
-    backgroundColor: 'lightblue',
-    marginTop: hp(25),
-    height: hp(15),
-  },
-  footerText1: {
-    textAlign: 'center',
-    display: 'flex',
-    justifyContent: 'flex-start',
-  },
-  footerText2: {
-    textAlign: 'center',
-    flexDirection: 'row-reverse',
-  },
+    justifyContent: 'space-between',
+    alignSelf: 'center'
+  }
 });
 
 export default SignIn;
