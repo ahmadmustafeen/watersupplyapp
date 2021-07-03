@@ -18,7 +18,7 @@ const Screen = props => {
 
   return (
     <View style={{
-      backgroundColor: '#e8ecf8',
+      backgroundColor: '#1f1a30',
       height: hp(100)
 
     }}>

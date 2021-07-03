@@ -36,7 +36,8 @@ const SignIn = props => {
 
       <View key="content" style={styles.container}>
         <Loader loading={isLoading} />
-        <Text style={styles.text_login}>Log in</Text>
+        <Text style={styles.text_login}>Log jnjn
+        in</Text>
         <View style={styles.textBox}>
           <TextInput
             style={styles.textBox_input}
