@@ -5,10 +5,12 @@ import Screen from '../../components/Screen'
 import Header from '../../components/Header'
 import ListContainer from '../../components/ListContainer'
 import { buttonSecondaryColor, primary, secondary } from '../../constants/Colors'
+import { BottleRequestScreen } from '../../constants/Screen'
 
 
 
 const Home = props => {
+    const {navigation} = props
     return(
         <Screen>
             <Header {...props} 
@@ -16,7 +18,7 @@ const Home = props => {
 
             />
             <View  style={styles.listContainer}>
-                <ListContainer title="Request for Bottle"/>
+                <ListContainer title="Request for Bottle" onPress={()=>navigation.navigate(BottleRequestScreen)}/>
             </View>
 
             <View  style={styles.listContainer}>
@@ -51,7 +53,6 @@ const styles = StyleSheet.create({
         borderWidth:2,
         borderColor:buttonSecondaryColor,
         overflow:'hidden',
-        backgroundColor:'blue'
     }
 })
 export default Home

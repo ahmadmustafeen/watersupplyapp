@@ -1,8 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../containers/Home';
-import {ContactScreen, HomeScreen, SettingScreen} from '../constants/Screen'
+import {ContactScreen, HomeScreen, SettingScreen,BottleRequestScreen} from '../constants/Screen'
 import  Settings  from '../containers/Settings'
+import RequestBottle from '../containers/RequestBottle.js';
 // import Form from '../containers/Form';
 // import ImagePickerScreen from '../containers/ImagePickerScreen';
 
@@ -17,6 +18,7 @@ const DashboardNav = props => {
       }}>
       <DashboardStack.Screen name={HomeScreen} component={Home} />
       <DashboardStack.Screen name={SettingScreen} component={Settings} />
+      <DashboardStack.Screen name={BottleRequestScreen} component={RequestBottle} />
       {/* <DashboardStack.Screen name={ContactScreen} component={Settings} /> */}
       {/* <DashboardStack.Screen name={HOME_SCREEN} component={Home} />
       <DashboardStack.Screen name={FORM_SCREEN} component={Form} /> */}

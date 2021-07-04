@@ -1,5 +1,5 @@
 import React from 'react'
-import {View,StyleSheet} from 'react-native'
+import {View,StyleSheet,TouchableOpacity} from 'react-native'
 import { widthPercentageToDP } from 'react-native-responsive-screen'
 import {Icon} from 'react-native-elements'
 import AppText from './AppText'
@@ -7,15 +7,16 @@ import { buttonColor, buttonSecondaryColor } from '../constants/Colors'
  
 const ListContainer = props =>{
     const {
-        title
+        title,
+        onPress
     } = props
     return(
-        <View style={styles.listContainer}>
-            <AppText color="white">{title}</AppText>
+        <TouchableOpacity style={styles.listContainer} onPress={onPress}>
+            <AppText color="white" onPress={onPress}>{title}</AppText>
             <View>
                 <Icon name="arrow-right" type="feather" iconStyle={styles.iconStyle} />
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 const styles = StyleSheet.create({
