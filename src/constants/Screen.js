@@ -6,6 +6,8 @@ export const ContactScreen = 'ContactScreen';
 export const MapScreen = 'MapScreen';
 export const ProfileScreen = 'ProfileScreen';
 export const BottleRequestScreen = 'BottleRequestScreen';
+export const RemainingDuesScreen = 'RemainingDuesScreen';
+export const PreviousPaymentScreen = 'PreviousPaymentScreen';
 
 
 // export const ContactScreen = 'ContactScreen';
