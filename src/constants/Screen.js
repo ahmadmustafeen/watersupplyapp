@@ -1,13 +1,13 @@
-export const SignInScreen = 'SignInScreen';
-export const SignUpScreen = 'SignUpScreen';
-export const HomeScreen = 'HomeScreen';
-export const SettingScreen = 'SettingInScreen';
-export const ContactScreen = 'ContactScreen';
-export const MapScreen = 'MapScreen';
-export const ProfileScreen = 'ProfileScreen';
-export const BottleRequestScreen = 'BottleRequestScreen';
-export const RemainingDuesScreen = 'RemainingDuesScreen';
-export const PreviousPaymentScreen = 'PreviousPaymentScreen';
+export const SIGN_IN_SCREEN = 'SIGN_IN_SCREEN';
+export const SIGN_UP_SCREEN = 'SIGN_UP_SCREEN';
+export const HOME_SCREEN = 'HOME_SCREEN';
+export const SETTING_SCREEN = 'SETTING_SCREEN';
+export const CONTACT_SCREEN = 'CONTACT_SCREEN';
+export const MAP_SCREEN = 'MAP_SCREEN';
+export const PROFILE_SCREEN = 'PROFILE_SCREEN';
+export const BOTTLE_REQUEST_SCREEN = 'BOTTLE_REQUEST_SCREEN';
+export const REMAINING_DUES_SCREEN = 'REMAINING_DUES_SCREEN';
+export const PREVIOUS_PAYMENT_SCREEN = 'PREVIOUS_PAYMENT_SCREEN';
 
 
 // export const ContactScreen = 'ContactScreen';

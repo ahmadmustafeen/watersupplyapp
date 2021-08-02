@@ -8,11 +8,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import AuthNav from './AuthNav';
 import DashboardNav from './DashboardNav';
-import { HomeScreen, SignInScreen, SignUpScreen } from '../constants/Screen';
 import { navigationRef } from '../../NavigationService';
 import DrawerMenu from '../containers/DrawerMenu';
-import Signin from '../containers/Signin';
-import Signup from '../containers/Signup';
 
 
 

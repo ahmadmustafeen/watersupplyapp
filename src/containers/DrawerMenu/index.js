@@ -4,7 +4,7 @@ import {View,StyleSheet} from 'react-native'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { secondary } from '../../constants/Colors'
 import DrawerItem from '../../components/DrawerItem'
-import {ContactScreen, HomeScreen, SettingScreen, SignInScreen} from '../../constants/Screen'
+import {ContactScreen, HomeScreen, HOME_SCREEN, SettingScreen, SETTING_SCREEN, SignInScreen} from '../../constants/Screen'
 
 
 const DrawerMenu = props => {
@@ -17,13 +17,13 @@ const DrawerMenu = props => {
                 </View>
             </View>
             <View style={styles.drawerItems}>
-                <DrawerItem onPress={()=>navigation.navigate(HomeScreen)} title="Home"/>
+                <DrawerItem onPress={()=>navigation.navigate(HOME_SCREEN)} title="Home"/>
             </View>
             <View style={styles.drawerItems}>
                 {/* <DrawerItem onPress={()=>navigation.navigate(ContactScreen)} title="Contact"/> */}
             </View>
             <View style={styles.drawerItems}>
-                <DrawerItem onPress={()=>navigation.navigate(SettingScreen)} title="Settings"/>
+                <DrawerItem onPress={()=>navigation.navigate(SETTING_SCREEN)} title="Settings"/>
             </View>
             <View style={styles.drawerItems}>
                 <DrawerItem onPress={()=>navigation.navigate("Auth")} title="Logout"/>

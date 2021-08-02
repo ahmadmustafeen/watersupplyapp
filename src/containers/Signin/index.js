@@ -8,7 +8,7 @@ import InputWithLabel from '../../components/InputWithLabel'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { primary, secondary } from '../../constants/Colors'
 import {validate} from '../../helper'
-import { HomeScreen, SignUpScreen } from '../../constants/Screen'
+import { HomeScreen, HOME_SCREEN, SignUpScreen, SIGN_UP_SCREEN } from '../../constants/Screen'
 
 const Signin = props => {
 
@@ -37,7 +37,7 @@ const validateAction = props =>{
 
 const onLoginPress = props =>{
     validateAction() &&
-    navigation.navigate("Home")
+    navigation.navigate("Home",{Screen:HOME_SCREEN})
     // Alert.alert("Login Action called")
 }
 
@@ -82,7 +82,7 @@ const onLoginPress = props =>{
                 color="white" 
                 underline 
                 style={styles.forgetPasswordText}
-                onPress={()=>navigation.navigate(SignUpScreen)}
+                onPress={()=>navigation.navigate(SIGN_UP_SCREEN)}
                 >
                    Or Create a new account!
                 </AppText>

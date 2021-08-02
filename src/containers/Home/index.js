@@ -5,7 +5,7 @@ import Screen from '../../components/Screen'
 import Header from '../../components/Header'
 import ListContainer from '../../components/ListContainer'
 import { buttonSecondaryColor, primary, secondary } from '../../constants/Colors'
-import { BottleRequestScreen, PreviousPaymentScreen, RemainingDuesScreen } from '../../constants/Screen'
+import { BOTTLE_REQUEST_SCREEN, PREVIOUS_PAYMENT_SCREEN, REMAINING_DUES_SCREEN } from '../../constants/Screen'
 
 
 
@@ -19,20 +19,20 @@ const Home = props => {
             />
             <View  style={styles.listContainer}>
                 <ListContainer title="Request for Bottle" 
-                onPress={()=>navigation.navigate(BottleRequestScreen)}/>
+                onPress={()=>navigation.navigate(BOTTLE_REQUEST_SCREEN)}/>
             </View>
 
             <View  style={styles.listContainer}>
                 <ListContainer 
                 title="View Remaining Dues"
-                onPress={()=>navigation.navigate(RemainingDuesScreen)}
+                onPress={()=>navigation.navigate(REMAINING_DUES_SCREEN)}
                 />
             </View>
 
             <View  style={styles.listContainer}>
                 <ListContainer 
                 title="View Previous Payment"
-                onPress={()=>navigation.navigate(PreviousPaymentScreen)}
+                onPress={()=>navigation.navigate(PREVIOUS_PAYMENT_SCREEN)}
                 
                 />
             </View>
